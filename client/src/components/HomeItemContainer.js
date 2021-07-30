@@ -1,7 +1,7 @@
 import React, {useState}from 'react'
 
 import HomeICGlue from './HomeICGlue';
-import HomeICPressOn from './HomeICPressOn';
+import HomeICPressOnContainer from './HomeICPressOnContainer';
 import HomeICHandCare from './HomeICHandCare';
 
 
@@ -11,7 +11,7 @@ function HomeItemContainer() {
 
     const displayItemPage = () => {
         if (showItem === "pressOn") {
-        return <HomeICPressOn />
+        return <HomeICPressOnContainer />
         } else if (showItem === "glue") {
         return <HomeICGlue />
         } else {
