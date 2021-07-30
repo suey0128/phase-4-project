@@ -1,3 +1,3 @@
 class GlueSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :image, :strength, :description, :price, :quantity
 end
