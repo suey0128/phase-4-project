@@ -1,19 +1,14 @@
-function HomeSearchAndSort () {
+function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) {
 
-    //need to move to a higher level
-    const onSearchChange = (e) => {
-        console.log(e.target.value)
-    }
 
     return (
         <div>
-            <h2>this is HomeSearchAndSort</h2>
 
             <div className="look-for-div">
                 <p>Looking for:</p>
-                <button>Press On</button>
-                <button>Glue</button>
-                <button>Hand Care</button>
+                <button onClick={()=>{setShowItemPage("pressOn")}}>Press On</button>
+                <button onClick={()=>{setShowItemPage("glue")}}>Glue</button>
+                <button onClick={()=>{setShowItemPage("handCare")}}>Hand Care</button>
             </div>
 
             <div className="search-div">
@@ -21,13 +16,14 @@ function HomeSearchAndSort () {
                     onChange={(e)=>{onSearchChange(e.target.value)}}/>
                     
                 </div>
-                    <select name="SortBy" id="SortBy">
-                        <option value="BestSelling">Best Selling</option>
-                        <option value="PriceLowtoHigh">Price: Low to High</option>
-                        <option value="PriceHightoLow">Price: High to Low</option>
+                    <select name="SortBy" id="SortBy" onChange={(e)=>{onSortBarChange(e.target.value)}}>
+                        <option value="sortBy">Sort by</option>
+                        <option value="bestSelling">Best Selling</option>
+                        <option value="priceLowtoHigh">Price: Low to High</option>
+                        <option value="priceHightoLow">Price: High to Low</option>
                     </select>
                 <div>
-
+                <br></br>
             </div>
         </div>
     )

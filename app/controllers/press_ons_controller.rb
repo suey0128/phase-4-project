@@ -7,6 +7,7 @@ class PressOnsController < ApplicationController
         render json: press_ons
     end
 
+
     private
 
     # def camper_params
