@@ -1,27 +1,34 @@
 import React, {useState}from 'react'
 
-import HomeICGlue from './HomeICGlue';
+import HomeICGlueContainer from './HomeICGlueContainer';
 import HomeICPressOnContainer from './HomeICPressOnContainer';
-import HomeICHandCare from './HomeICHandCare';
+import HomeICHandCareContainer from './HomeICHandCareContainer';
 
 
-function HomeItemContainer() {
-    //use state for displaying 
-    const [showItem, setShowItem] = useState("pressOn")
+function HomeItemContainer({showItemPage, pressOnOnDisplay, glueOnDisplay, handCareOnDisplay, setPressOnOnDisplay, pressOnArr}) {
+
+
 
     const displayItemPage = () => {
-        if (showItem === "pressOn") {
-        return <HomeICPressOnContainer />
-        } else if (showItem === "glue") {
-        return <HomeICGlue />
+        if (showItemPage === "pressOn") {
+        return <HomeICPressOnContainer pressOnOnDisplay={pressOnOnDisplay}
+                                        setPressOnOnDisplay={setPressOnOnDisplay}
+                                        pressOnArr={pressOnArr}
+                                        />
+        } else if (showItemPage === "glue") {
+        return <HomeICGlueContainer glueOnDisplay={glueOnDisplay}
+        
+        
+                />
         } else {
-        return <HomeICHandCare />
+        return <HomeICHandCareContainer handCareOnDisplay={handCareOnDisplay}
+        
+        />
         }
     }
 
     return (
         <div>
-            <h2>this is HomeItemContainer</h2>
             {displayItemPage()}
         </div>
     )

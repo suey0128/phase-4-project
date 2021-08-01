@@ -1,3 +1,3 @@
 class PressOnSerializer < ActiveModel::Serializer
-  attributes :id, :name, :shape, :color, :add_on, :description, :price, :quantity
+  attributes :id, :name, :shape, :color, :add_on, :description, :price, :quantity, :image
 end
