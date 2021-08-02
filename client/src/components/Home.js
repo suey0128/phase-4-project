@@ -3,9 +3,8 @@ import HomeItemContainer from "./HomeItemContainer";
 
 import React, { useState, useEffect } from "react";
 
-function Home () {
-    //use state for displaying 
-    const [showItemPage, setShowItemPage] = useState("pressOn")
+function Home ({showItemPage, setShowItemPage}) {
+
     //state for the 3 types of items from the database
     const [pressOnArr, setPressOnArr] = useState([])
     const [glueArr, setGlueArr] = useState([])

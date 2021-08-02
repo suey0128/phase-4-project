@@ -2,8 +2,6 @@
 import '../assets/App.css';
 import Header from './Header';
 import Home from './Home';
-// import ItemDetailHandCare from './ItemDetailHandCare';
-// import ItemDetailGlue from './ItemDetailGlue';
 import ItemDetailPage from './ItemDetailPage';
 import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
@@ -22,6 +20,8 @@ import React, { useState, useEffect } from "react";
 
 
 function App() {
+  //use state for displaying 
+  const [showItemPage, setShowItemPage] = useState("pressOn")
 
 
 
@@ -33,7 +33,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage}/>
           </Route>
 
           <Route path="/signup">
@@ -57,16 +57,8 @@ function App() {
           </Route>
 
           <Route path="/items/:type/:id">
-            <ItemDetailPage />
+            <ItemDetailPage showItemPage={showItemPage}/>
           </Route>
-
-          {/* <Route path="/itemdetailhandcare">
-            <ItemDetailHandCare />
-          </Route>
-
-          <Route path="/itemdetailglue">
-            <ItemDetailGlue />
-          </Route> */}
 
           <Route path="/purchasedetail">
             <PurchaseDetail />
