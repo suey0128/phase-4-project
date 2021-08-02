@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import shape from "@material-ui/core/styles/shape";
 
-function ItemDetailPage ({showItemPage, onAddToCartClick}) {
+function ItemDetailPage ({showItemPage, setItemInCart, itemInCart}) {
     const [itemInfo, setItemInfo] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [addTocartQuantity, setAddTocartQuantity] = useState(1)
 
-
+    const history = useHistory();
     const params = useParams();
     // console.log (params)  => {type: "press_ons", id: "2"}
     // console.log(`${params.type}/${params.id}`)
@@ -20,10 +20,9 @@ function ItemDetailPage ({showItemPage, onAddToCartClick}) {
                 const itemData =  await res.json()
                 setItemInfo(itemData)
                 setIsLoaded(true);
-
             }
         }
-        fetchItem(itemInfo)
+        fetchItem()
     },[])
 
     if (!isLoaded) return <h2>Loading...</h2>;
@@ -35,6 +34,16 @@ function ItemDetailPage ({showItemPage, onAddToCartClick}) {
         showItemDetail = <p>strength: {itemInfo.strength}</p>
     } 
 
+    const addToCartClick = (e) => {
+        e.preventDefault();
+        console.log(addTocartQuantity, itemInfo)
+        //extract the info needed to pass to the backend
+        let itemAdded = {
+
+        }
+        //make a POST create a CartItem to the backend 
+        
+      }
 
     return (
 
@@ -47,7 +56,7 @@ function ItemDetailPage ({showItemPage, onAddToCartClick}) {
             {showItemDetail}
             <p>description: {itemInfo.description}</p>
             <p>quantity: </p>
-            <form onSubmit={(e)=>{onAddToCartClick(e, addTocartQuantity,itemInfo)}}>
+            <form onSubmit={addToCartClick}>
                 <select onChange={(e)=>{setAddTocartQuantity(Number(e.target.value))}}>
                     <option value="1">1</option>
                     <option value="2">2</option>
