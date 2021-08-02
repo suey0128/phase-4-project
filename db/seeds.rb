@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+<<<<<<< HEAD
+
+=======
 puts "Clearing old data..."
 User.destroy_all
 Payment.destroy_all
@@ -90,3 +93,4 @@ ct16 = CartItem.create(shopping_cart_id: sc10.id, item_id:hc3.id,item_type:"Hand
 
 
 puts "🌱🌱🌱🌱Done!🌱🌱🌱🌱"
+>>>>>>> main
