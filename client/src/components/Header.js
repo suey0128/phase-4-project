@@ -1,7 +1,8 @@
+import NavBar from "./Navbar"
 function Header () {
     return (
         <div>
-            <h2>this is Header</h2>
+            <h2> <NavBar /> </h2>
         </div>
     )
   }
