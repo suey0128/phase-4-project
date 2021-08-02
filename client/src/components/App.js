@@ -22,7 +22,15 @@ import React, { useState, useEffect } from "react";
 function App() {
   //use state for displaying 
   const [showItemPage, setShowItemPage] = useState("pressOn")
+  const [itemInCart, setItemInCart] = useState([])
 
+
+  const onAddToCartClick = (e, addTocartQuantity,itemInfo) => {
+    e.preventDefault();
+    console.log(addTocartQuantity, itemInfo)
+    //store in cart info into a state var
+    setItemInCart([...itemInCart, itemInfo])
+  }
 
 
 
@@ -57,7 +65,7 @@ function App() {
           </Route>
 
           <Route path="/items/:type/:id">
-            <ItemDetailPage showItemPage={showItemPage}/>
+            <ItemDetailPage showItemPage={showItemPage} onAddToCartClick={onAddToCartClick}/>
           </Route>
 
           <Route path="/purchasedetail">
