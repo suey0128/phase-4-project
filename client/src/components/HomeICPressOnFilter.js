@@ -8,48 +8,48 @@ function HomeICPressOnFilter({onHandleColorCheckBoxChange, onHandleShapeCheckBox
         <div>
             <div className="color-filter">
                 <p>color</p>
-                <input type="checkbox" id="all" name="all" value="all" check={false} onChange={onHandleColorCheckBoxChange}/>
-                <label for="all">multi colors</label>
-                <input type="checkbox" id="white" name="white" value="white" check={false} onChange={onHandleColorCheckBoxChange}/>
-                <label for="white">white</label>
-                <input type="checkbox" id="pink" name="pink" value="pink" check={false} onChange={onHandleColorCheckBoxChange}/>
-                <label for="pink">pink</label>
-                <input type="checkbox" id="nude" name="nude" value="nude" check={false} onChange={onHandleColorCheckBoxChange}/>
-                <label for="nude">nude</label>
-                <input type="checkbox" id="purple" name="purple" value="purple" check={false} onChange={onHandleColorCheckBoxChange}/>
-                <label for="purple"> purple</label>
+                <input type="checkbox" id="all" name="all" value="all"  onChange={onHandleColorCheckBoxChange}/>
+                <label >multi colors</label>
+                <input type="checkbox" id="white" name="white" value="white"  onChange={onHandleColorCheckBoxChange}/>
+                <label >white</label>
+                <input type="checkbox" id="pink" name="pink" value="pink"  onChange={onHandleColorCheckBoxChange}/>
+                <label >pink</label>
+                <input type="checkbox" id="nude" name="nude" value="nude"  onChange={onHandleColorCheckBoxChange}/>
+                <label >nude</label>
+                <input type="checkbox" id="purple" name="purple" value="purple"  onChange={onHandleColorCheckBoxChange}/>
+                <label > purple</label>
                 <input type="checkbox" id="red" name="red" value="red" onChange={onHandleColorCheckBoxChange}/>
-                <label for="red">red</label>
+                <label >red</label>
                 <input type="checkbox" id="green" name="green" value="green" onChange={onHandleColorCheckBoxChange}/>
-                <label for="green">green</label>
+                <label >green</label>
                 <input type="checkbox" id="peach" name="peach" value="peach" onChange={onHandleColorCheckBoxChange}/>
-                <label for="peach">peach</label>
+                <label >peach</label>
                 <input type="checkbox" id="chrome" name="chrome" value="chrome" onChange={onHandleColorCheckBoxChange}/>
-                <label for="chrome">chrome</label>
+                <label >chrome</label>
                 <input type="checkbox" id="black" name="black" value="black" onChange={onHandleColorCheckBoxChange}/>
-                <label for="black">black</label>
+                <label >black</label>
                 {/* <input type="checkbox" id="others" name="others" value="others" onChange={onHandleColorCheckBoxChange}/>
-                <label for="others">others</label> */}
+                <label >others</label> */}
             </div>
 
             <div className="shape-filter">
                 <p>shape</p>
                 <input type="checkbox" id="coffin" name="coffin" value="coffin" onChange={onHandleShapeCheckBoxChange}/>
-                <label for="coffin">coffin</label>
+                <label >coffin</label>
                 <input type="checkbox" id="round" name="round" value="round" onChange={onHandleShapeCheckBoxChange}/>
-                <label for="round">round</label>
+                <label >round</label>
                 <input type="checkbox" id="stiletto" name="stiletto" value="stiletto" onChange={onHandleShapeCheckBoxChange}/>
-                <label for="stiletto">stiletto</label>
+                <label >stiletto</label>
                 <input type="checkbox" id="square" name="square" value="square" onChange={onHandleShapeCheckBoxChange}/>
-                <label for="square">square</label>
+                <label >square</label>
             </div>
 
             <div className="add-on-filter">
                 <p>add on</p>
                 <input type="checkbox" id="jewels" name="jewels" value="jewels" onChange={onHandleAddOnCheckBoxChange}/>
-                <label for="jewels">jewels</label>
+                <label >jewels</label>
                 <input type="checkbox" id="others" name="others" value="others" onChange={onHandleAddOnCheckBoxChange}/>
-                <label for="others">others</label>
+                <label >others</label>
             </div>
 
             <br></br>

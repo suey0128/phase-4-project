@@ -7,6 +7,11 @@ class GluesController < ApplicationController
         render json: glues
     end
 
+    def show
+        glue = Glue.find(params[:id])
+        render json: glue
+    end
+
     private
 
     # def camper_params
@@ -14,7 +19,7 @@ class GluesController < ApplicationController
     # end
 
     def render_not_found_response
-        render json: {error: "Shopping cart not found"}, status: :not_found
+        render json: {error: "Item not found"}, status: :not_found
     end
 
     def render_unprocessable_entity_response(invalid)

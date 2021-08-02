@@ -7,6 +7,11 @@ class HandCaresController < ApplicationController
         render json: hand_cares
     end
 
+    def show
+        hand_care = HandCare.find(params[:id])
+        render json: hand_care
+    end
+
     private
 
     # def camper_params
@@ -14,7 +19,7 @@ class HandCaresController < ApplicationController
     # end
 
     def render_not_found_response
-        render json: {error: "Shopping cart not found"}, status: :not_found
+        render json: {error: "Item not found"}, status: :not_found
     end
 
     def render_unprocessable_entity_response(invalid)
