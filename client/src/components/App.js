@@ -23,15 +23,22 @@ function App() {
   //use state for displaying 
   const [showItemPage, setShowItemPage] = useState("pressOn")
   const [itemInCart, setItemInCart] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
 
+  // fetch user for testing. delete when login function is setup 
+//   useEffect(() => {
+//     async function fetchUser(){
+//         const res = await fetch(`/users/1`)
+//         if (res.ok) {
+//             const user =  await res.json()
+//             setCurrentUser(user)
+//             // setIsLoaded(true);
+//         }
+//     }
+//     fetchUser()
+// },[])
 
-  const onAddToCartClick = (e, addTocartQuantity,itemInfo) => {
-    e.preventDefault();
-    console.log(addTocartQuantity, itemInfo)
-    //store in cart info into a state var
-    setItemInCart([...itemInCart, itemInfo])
-  }
-
+//     // if (!isLoaded) return <h2>Loading...</h2>;
 
 
   return (
@@ -52,8 +59,8 @@ function App() {
             <Login />
           </Route>
 
-          <Route path="/shoppingcart">
-            <ShoppingCart />
+          <Route path="/shoppingcart" >
+            <ShoppingCart itemInCart={itemInCart} />
           </Route>
 
           <Route path="/checkout">
@@ -65,7 +72,10 @@ function App() {
           </Route>
 
           <Route path="/items/:type/:id">
-            <ItemDetailPage showItemPage={showItemPage} onAddToCartClick={onAddToCartClick}/>
+            <ItemDetailPage showItemPage={showItemPage} 
+                            setItemInCart={setItemInCart} 
+                            itemInCart={itemInCart}
+                            />
           </Route>
 
           <Route path="/purchasedetail">
