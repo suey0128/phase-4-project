@@ -7,6 +7,10 @@ class PressOnsController < ApplicationController
         render json: press_ons
     end
 
+    def show
+        press_on = PressOn.find(params[:id])
+        render json: press_on
+    end
 
     private
 
@@ -15,7 +19,7 @@ class PressOnsController < ApplicationController
     # end
 
     def render_not_found_response
-        render json: {error: "Shopping cart not found"}, status: :not_found
+        render json: {error: "Item not found"}, status: :not_found
     end
 
     def render_unprocessable_entity_response(invalid)
