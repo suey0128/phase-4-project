@@ -26,7 +26,12 @@ function ItemDetailPage ({showItemPage}) {
 
     if (!isLoaded) return <h2>Loading...</h2>;
 
-    console.log(itemInfo)
+    let showItemDetail; 
+    if (showItemPage === "pressOn") {
+        showItemDetail = <p>color: {itemInfo.color}<span>shape: {itemInfo.shape}</span> <span>add on: {itemInfo.add_on}</span></p>
+    } else if (showItemPage ==="glue") {
+        showItemDetail = <p>strength: {itemInfo.strength}</p>
+    } 
 
     return (
 
@@ -36,18 +41,8 @@ function ItemDetailPage ({showItemPage}) {
             <h3>{itemInfo.name}</h3>
             <p>$ {itemInfo.price}</p>
             <p>{itemInfo.quantity}</p> 
-            {
-            //  if (showItemPage === "pressOn") {
-            //  <p>color: <span>shape: </span> <span>add on: </span></p>
-            //  } else if (showItemPage ==="glue") {
-            //     <p>strength: </p>
-            //  } else {
-            // <p>description: </p>
-            //  }
-            showItemPage === "pressOn" ? 
-            ( <p>color: <span>shape: </span> <span>add on: </span></p>
-            ) : null
-            }
+            {showItemDetail}
+            <p>description: {itemInfo.description}</p>
 
         </div>
         
