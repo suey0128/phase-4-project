@@ -1,10 +1,10 @@
-import logo from '../assets/logo.svg';
+// import logo from '../assets/logo.svg';
 import '../assets/App.css';
 import Header from './Header';
 import Home from './Home';
-import ItemDetailHandCare from './ItemDetailHandCare';
-import ItemDetailPressOn from './ItemDetailPressOn';
-import ItemDetailGlue from './ItemDetailGlue';
+// import ItemDetailHandCare from './ItemDetailHandCare';
+// import ItemDetailGlue from './ItemDetailGlue';
+import ItemDetailPage from './ItemDetailPage';
 import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
 import User from './User';
@@ -22,6 +22,10 @@ import React, { useState, useEffect } from "react";
 
 
 function App() {
+
+
+
+
   return (
     <div className="App">
       <Router>
@@ -52,17 +56,17 @@ function App() {
             <User />
           </Route>
 
-          <Route path="/itemdetailpresson">
-            <ItemDetailPressOn />
+          <Route path="/items/:type/:id">
+            <ItemDetailPage />
           </Route>
 
-          <Route path="/itemdetailhandcare">
+          {/* <Route path="/itemdetailhandcare">
             <ItemDetailHandCare />
           </Route>
 
           <Route path="/itemdetailglue">
             <ItemDetailGlue />
-          </Route>
+          </Route> */}
 
           <Route path="/purchasedetail">
             <PurchaseDetail />

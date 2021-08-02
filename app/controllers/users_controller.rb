@@ -8,8 +8,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        byebug
-        user = User.create(name: user_params[:name])
+        user = User.create!(user_params)
         render json: user
     end
 
