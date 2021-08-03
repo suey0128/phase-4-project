@@ -30,8 +30,9 @@ function Auth({setCurrentUser}){
         } else {
             setErrors(userData.message)
         }
-
+        console.log(user)
     };
+
 
     return (
         <>
