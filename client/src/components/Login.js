@@ -25,8 +25,8 @@ function Auth({setCurrentUser}){
         const userData = await res.json();
         if(userData.id){
             console.log(userData)
-            setCurrentUser(userData)
-            history.push('/')
+            // setCurrentUser(userData)
+            // history.push('/')
         } else {
             setErrors(userData.message)
         }
