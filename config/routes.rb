@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   resources :hand_cares
   resources :glues
   resources :press_ons
+
   post '/login/' => 'sessions#create'
   delete '/logout/' => 'sessions#destroy'
   get '/me/' => 'users#show'
+  
   get '/press_ons/best_selling' => 'press_ons#best_selling'
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
