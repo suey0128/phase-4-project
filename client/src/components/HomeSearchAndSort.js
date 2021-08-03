@@ -1,15 +1,23 @@
+import {Link} from "react-router-dom";
+
 function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) {
 
 
     return (
         <div>
 
+            <Link to="/shoppingcart">
+                <button>Shopping Cart</button>
+            </Link>
+            
             <div className="look-for-div">
                 <p>Looking for:</p>
                 <button onClick={()=>{setShowItemPage("pressOn")}}>Press On</button>
                 <button onClick={()=>{setShowItemPage("glue")}}>Glue</button>
                 <button onClick={()=>{setShowItemPage("handCare")}}>Hand Care</button>
             </div>
+            
+
 
             <div className="search-div">
                 <input id="search-bar" type="text" placeholder="Search..." 
@@ -25,6 +33,8 @@ function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) 
                 <div>
                 <br></br>
             </div>
+
+
         </div>
     )
   }
