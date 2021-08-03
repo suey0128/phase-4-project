@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Auth from './Auth.js';
+import { NavLink } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,12 +35,20 @@ const useStyles = makeStyles((theme) => ({
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
+            <NavLink to="/">
             <Typography variant="h6" className={classes.title}>
               Nail Code
             </Typography>
-            <Button color="inherit"  onClick={()=>handleLoginClick()}  >Login</Button>
+            </NavLink>
+            <NavLink to="/signup">
+            <Button color="inherit"> Sign Up</Button>
+            </NavLink>
+            <NavLink to="/login">
+            <Button color="inherit">Login</Button>
+            </NavLink>
           </Toolbar>
         </AppBar>
+    
       </div>
     );
   }

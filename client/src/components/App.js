@@ -9,6 +9,8 @@ import User from './User';
 import PurchaseDetail from './PurchaseDetail'
 import SignUp from './SignUp'
 import Login from './Login';
+import Auth from './Auth';
+
 
 import { 
   BrowserRouter as Router,
@@ -119,9 +121,9 @@ console.log(cartItemInstances)
             <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
           </Route>
 
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignUp />
-          </Route>
+          </Route> */}
 
           <Route path="/login">
             <Login />
@@ -148,7 +150,9 @@ console.log(cartItemInstances)
           <Route path="/purchasedetail">
             <PurchaseDetail />
           </Route>
-
+           <Route exact path="/signup">
+               <Auth />
+           </Route>
         </Switch>
       </Router>
     </div>
