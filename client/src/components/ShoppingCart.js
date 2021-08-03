@@ -1,6 +1,7 @@
 import ShoppingCartItemCard from "./ShoppingCartItemCard";
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 function ShoppingCart({currentUser, setCurrentUser}) {
@@ -38,7 +39,9 @@ function ShoppingCart({currentUser, setCurrentUser}) {
         : 
         (<h2>Your cart is empty</h2>)}
         <h3>Total: ${currentUser.shopping_cart.total_amount}</h3>
-        <button >Check Out</button>
+        <Link to="/checkout">
+          <button >Check Out</button>
+        </Link>
     </div>
   );
 }
