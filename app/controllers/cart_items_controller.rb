@@ -7,11 +7,22 @@ class CartItemsController < ApplicationController
         render json: cart_items
     end
 
+    def create
+        cart_item = CartItem.create!(cart_item_params)
+        render json: cart_item
+    end
+
+    def update
+        cart_item = CartItem.find(params[:id])
+        cart_item.update!(cart_item_params)
+        render json: cart_item
+    end
+
     private
 
-    # def camper_params
-    #     params.require(:shopping_cart).permit(:name, :age)
-    # end
+    def cart_item_params
+        params.require(:cart_item).permit(:shopping_cart_id, :in_cart_quantity, :item_id, :item_type)
+    end
 
     def render_not_found_response
         render json: {error: "Shopping cart not found"}, status: :not_found

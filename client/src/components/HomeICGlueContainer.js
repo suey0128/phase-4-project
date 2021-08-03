@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function HomeICGlue({glueOnDisplay}) {
+function HomeICGlue({glueOnDisplay, onAddToCartClick}) {
 
   //material ui thing
   const classes = useStyles();
@@ -26,7 +26,9 @@ function HomeICGlue({glueOnDisplay}) {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-            {glueOnDisplay.map((glueItem)=><HomeICItemCard key={glueItem.id} item={glueItem}/>)}
+            {glueOnDisplay.map((glueItem)=><HomeICItemCard key={glueItem.id} 
+                                                           onAddToCartClick={onAddToCartClick} 
+                                                           item={glueItem}/>)}
         </Grid>
       </div>
 
