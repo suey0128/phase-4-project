@@ -5,7 +5,7 @@ import HomeICPressOnContainer from './HomeICPressOnContainer';
 import HomeICHandCareContainer from './HomeICHandCareContainer';
 
 
-function HomeItemContainer({showItemPage, pressOnOnDisplay, glueOnDisplay, handCareOnDisplay, setPressOnOnDisplay, pressOnArr}) {
+function HomeItemContainer({showItemPage, pressOnOnDisplay, glueOnDisplay, handCareOnDisplay, setPressOnOnDisplay, pressOnArr, onAddToCartClick}) {
 
 
 
@@ -14,14 +14,17 @@ function HomeItemContainer({showItemPage, pressOnOnDisplay, glueOnDisplay, handC
         return <HomeICPressOnContainer pressOnOnDisplay={pressOnOnDisplay}
                                         setPressOnOnDisplay={setPressOnOnDisplay}
                                         pressOnArr={pressOnArr}
+                                        onAddToCartClick={onAddToCartClick}
                                         />
         } else if (showItemPage === "glue") {
         return <HomeICGlueContainer glueOnDisplay={glueOnDisplay}
+                                    onAddToCartClick={onAddToCartClick}
         
         
                 />
         } else {
         return <HomeICHandCareContainer handCareOnDisplay={handCareOnDisplay}
+                                        onAddToCartClick={onAddToCartClick}
         
         />
         }

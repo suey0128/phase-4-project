@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 
 
-function HomeICItemCard({item}) {
+function HomeICItemCard({item, onAddToCartClick}) {
 
     let history = useHistory();
 
@@ -30,7 +30,7 @@ function HomeICItemCard({item}) {
                         <h3 className="item-name">{item.name}</h3>
                         <p>$ {item.price}</p>
                     </div>
-                    <button>Add to Cart</button>
+                    <button onClick={(e)=> onAddToCartClick(e,1,item)}>Add to Cart</button>
                 </div>
         </Grid>
 

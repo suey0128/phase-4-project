@@ -24,22 +24,91 @@ function App() {
   const [showItemPage, setShowItemPage] = useState("pressOn")
   const [itemInCart, setItemInCart] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
+  const [isUserLoaded, setisUserLoaded] = useState(false)
+  const [errors, setErrors] = useState([]);
 
-  // fetch user for testing. delete when login function is setup 
-//   useEffect(() => {
-//     async function fetchUser(){
-//         const res = await fetch(`/users/1`)
-//         if (res.ok) {
-//             const user =  await res.json()
-//             setCurrentUser(user)
-//             // setIsLoaded(true);
-//         }
-//     }
-//     fetchUser()
-// },[])
+  // keep track of the cartItem instances
+  const [cartItemInstances, setCartItemInstances] = useState([])
 
-//     // if (!isLoaded) return <h2>Loading...</h2>;
 
+  //fetch user for testing. delete when login function is setup 
+  useEffect(() => {
+    async function fetchUser(){
+        const res = await fetch(`/users/1`)
+        if (res.ok) {
+            const user =  await res.json()
+            setCurrentUser(user)
+            setCartItemInstances(user.in_cart_item_instances)
+            setisUserLoaded(true)
+        }
+    }
+    fetchUser()
+},[])
+
+if (!isUserLoaded) return <h2>Loading...</h2>;
+
+  const onAddToCartClick = (e, quantity, item) => {
+    e.preventDefault();
+    // console.log(shoppingCartDisplayItemList, item)
+    let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
+    //is this item alreay in cart? yes - PATCH, no - POST
+    if (itemAlreadyInCart) {
+      console.log( itemAlreadyInCart )
+      // PATCH
+      let totalQuantity = itemAlreadyInCart.in_cart_quantity + quantity
+      console.log(totalQuantity)
+      async function updateCartItem() {
+        const res = await fetch(`/cart_items/${itemAlreadyInCart.id}`, {
+          method: "PATCH",
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify({in_cart_quantity: totalQuantity })
+        });
+        if (res.ok) {
+          const itemInCartUpdated = await res.json();
+          console.log("dataBackFromPatch",itemInCartUpdated)
+          //update the state
+          let deletedOldInstance = cartItemInstances.filter(i=> i !== itemAlreadyInCart)
+          setCartItemInstances([...deletedOldInstance, itemInCartUpdated])
+        } else {
+          const error = await res.json()
+          setErrors(error.message)
+        }
+      }
+      updateCartItem();
+    }  else {
+      //POST
+      //extract the info needed to pass to the backend
+      let addedItem = {
+        shopping_cart_id: currentUser.shopping_cart.id, 
+        item_id: item.id,
+        item_type:item.item_type,
+        in_cart_quantity: quantity
+      }
+      //make a POST request
+      async function createCartItem() {
+        const res = await fetch(`/cart_items`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(addedItem),
+        })
+        if (res.ok) {
+          let addedToCartItem = await res.json();
+          //update the state
+          console.log(addedToCartItem)
+          setCartItemInstances([...cartItemInstances, addedToCartItem])
+        } else {
+          const error = await res.json()
+          setErrors(error.message)
+        }
+      };
+      createCartItem();
+    };
+  }
+
+
+console.log(cartItemInstances)
 
   return (
     <div className="App">
@@ -48,7 +117,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage}/>
+            <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
           </Route>
 
           <Route path="/signup">
@@ -73,8 +142,7 @@ function App() {
 
           <Route path="/items/:type/:id">
             <ItemDetailPage showItemPage={showItemPage} 
-                            setItemInCart={setItemInCart} 
-                            itemInCart={itemInCart}
+                            onAddToCartClick={onAddToCartClick}
                             />
           </Route>
 
