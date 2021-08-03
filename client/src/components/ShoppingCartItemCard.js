@@ -1,13 +1,13 @@
 
-function ShoppingCartItemCard () {
+function ShoppingCartItemCard ({item}) {
     return (
         <div>
-            <img src=""/>
-            <h3>name</h3>
-            <p>price</p>
+            <img src={item.image}/>
+            <h3>name {item.name}</h3>
+            <p>price{item.price}</p>
             {/* <form> */}
                 <label>Quantity: </label>
-                <input name="quantity" id="quantity" type="text" />
+                <input name="quantityInCart" id="quantityInCart" type="text" />
             {/* </form> */}
         </div>
     )

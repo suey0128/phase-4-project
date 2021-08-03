@@ -22,7 +22,6 @@ import React, { useState, useEffect } from "react";
 function App() {
   //use state for displaying 
   const [showItemPage, setShowItemPage] = useState("pressOn")
-  const [itemInCart, setItemInCart] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [isUserLoaded, setisUserLoaded] = useState(false)
   const [errors, setErrors] = useState([]);
@@ -43,9 +42,9 @@ function App() {
         }
     }
     fetchUser()
-},[])
+  },[])
 
-if (!isUserLoaded) return <h2>Loading...</h2>;
+  if (!isUserLoaded) return <h2>Loading...</h2>;
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -129,7 +128,7 @@ console.log(cartItemInstances)
           </Route>
 
           <Route path="/shoppingcart" >
-            <ShoppingCart itemInCart={itemInCart} />
+            <ShoppingCart currentUser={currentUser} setCurrentUser={setCurrentUser}/>
           </Route>
 
           <Route path="/checkout">
