@@ -9,6 +9,8 @@ import User from './User';
 import PurchaseDetail from './PurchaseDetail'
 import SignUp from './SignUp'
 import Login from './Login';
+import Auth from './Auth';
+
 
 import { 
   BrowserRouter as Router,
@@ -51,9 +53,9 @@ function App() {
             <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage}/>
           </Route>
 
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignUp />
-          </Route>
+          </Route> */}
 
           <Route path="/login">
             <Login />
@@ -81,7 +83,9 @@ function App() {
           <Route path="/purchasedetail">
             <PurchaseDetail />
           </Route>
-
+           <Route exact path="/signup">
+               <Auth />
+           </Route>
         </Switch>
       </Router>
     </div>
