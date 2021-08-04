@@ -8,10 +8,10 @@ Glue.destroy_all
 HandCare.destroy_all
 
 puts "Seeding users..."
-u1 = User.create(username: "suey", first_name: "Suey", last_name:"Yu", password_digest: "123", billing_address: "Seattle", shipping_address: "seattle", email:"suey@gmail.com", birthday: Date.parse('2001-02-03'))
-u2 = User.create(username: "bri", first_name: "Briana", last_name:"Gordon", password_digest: "123", billing_address: "Los Angeles", shipping_address: "Los Angeles", email:"bri@gmail.com", birthday: Date.parse('2002-02-03'))
-u3 = User.create(username: "kiana", first_name: "Kiana", last_name:"Smith", password_digest: "321", billing_address:"Michigan",shipping_address: "Michigan",email:"kiana@gmail.com",birthday: Date.parse('1994-08-04'))
-u4 = User.create(username: "ashely", first_name: "Ashely", last_name:"Walker", password_digest:"321", billing_address:"Huston",shipping_address: "Huston",email:"ashely@att.net",birthday: Date.parse('1998-05-12'))
+u1 = User.create(username: "suey", first_name: "Suey", last_name:"Yu", password_digest: User.digest('123'), billing_address: "Seattle", shipping_address: "seattle", email:"suey@gmail.com", birthday: Date.parse('2001-02-03'))
+u2 = User.create(username: "bri", first_name: "Briana", last_name:"Gordon", password_digest: User.digest('123'), billing_address: "Los Angeles", shipping_address: "Los Angeles", email:"bri@gmail.com", birthday: Date.parse('2002-02-03'))
+u3 = User.create(username: "kiana", first_name: "Kiana", last_name:"Smith", password_digest: User.digest('123'), billing_address:"Michigan",shipping_address: "Michigan",email:"kiana@gmail.com",birthday: Date.parse('1994-08-04'))
+u4 = User.create(username: "ashely", first_name: "Ashely", last_name:"Walker", password_digest:User.digest('123'), billing_address:"Huston",shipping_address: "Huston",email:"ashely@att.net",birthday: Date.parse('1998-05-12'))
 
 puts "Seeding shopping_cart..."
 sc1 = ShoppingCart.create(user_id: u1.id, paid: false)
