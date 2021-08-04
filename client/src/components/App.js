@@ -33,20 +33,20 @@ function App() {
 
 
   //fetch user for testing. delete when login function is setup 
-  useEffect(() => {
-    async function fetchUser(){
-        const res = await fetch(`/users/1`)
-        if (res.ok) {
-            const user =  await res.json()
-            setCurrentUser(user)
-            setCartItemInstances(user.in_cart_item_instances)
-            setisUserLoaded(true)
-        }
-    }
-    fetchUser()
-  },[])
+  // useEffect(() => {
+  //   async function fetchUser(){
+  //       const res = await fetch(`/users/1`)
+  //       if (res.ok) {
+  //           const user =  await res.json()
+  //           setCurrentUser(user)
+  //           setCartItemInstances(user.in_cart_item_instances)
+  //           setisUserLoaded(true)
+  //       }
+  //   }
+  //   fetchUser()
+  // },[])
 
-  if (!isUserLoaded) return <h2>Loading...</h2>;
+  // if (!isUserLoaded) return <h2>Loading...</h2>;
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -126,7 +126,7 @@ console.log(cartItemInstances)
           </Route> */}
 
           <Route path="/login">
-            <Login />
+            <Login  setCurrentUser={setCurrentUser}/>
           </Route>
 
           <Route path="/shoppingcart" >
