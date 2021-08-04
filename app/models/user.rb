@@ -13,4 +13,8 @@ class User < ApplicationRecord
                                                     BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
     end
+
+    validates :first_name, presence: true, length: { in: 2..20 }
+    validates :last_name, presence: true, length: { in: 2..20 }
+    validates :shipping_address, presence: true, length: { in: 2..150 }
 end
