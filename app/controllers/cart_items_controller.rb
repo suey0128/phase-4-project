@@ -24,6 +24,8 @@ class CartItemsController < ApplicationController
         head :no_content
     end
 
+    
+
     private
 
     def cart_item_params
