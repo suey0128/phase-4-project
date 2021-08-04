@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/login/' => 'sessions#create'
   delete '/logout/' => 'sessions#destroy'
   get '/me/' => 'users#show'
+   
   
   get '/press_ons/best_selling' => 'press_ons#best_selling'
 

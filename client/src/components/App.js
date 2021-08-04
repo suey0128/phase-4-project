@@ -27,7 +27,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isUserLoaded, setisUserLoaded] = useState(false)
   const [errors, setErrors] = useState([]);
+
   const [needFetch, setNeedFetch] = useState(false)
+
 
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
@@ -49,6 +51,26 @@ function App() {
 
   if (!isUserLoaded) return <h2>Loading...</h2>;
 
+
+
+    //Staying logged in function
+    useEffect(() => {
+      fetch("/me").then((response) => {
+        if (response.ok) {
+          response.json().then((user) => setCurrentUser(user));
+        }
+      });
+    }, []);
+  
+    if (currentUser) {
+      // return <h2>Welcome, {user.username}!</h2>;
+      console.log(currentUser)
+    } else {
+      // return <Login onLogin={setUser} />;
+      console.log('failed')
+    }
+  
+  
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -114,11 +136,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header currentUser={currentUser} />
 
         <Switch>
           <Route exact path="/">
-            <Home showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
+            <Home  showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
           </Route>
 
           {/* <Route path="/signup">
