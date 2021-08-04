@@ -4,29 +4,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
-function ShoppingCart({currentUser, setCurrentUser}) {
-  const [shoppingCartItemList, setShoppingCartItemList] = useState([])
-  const [isShopingCartLoaded, setIsShopingCartLoaded] = useState(false)
-  const [needFetch, setNeedFetch] = useState(false)
+function ShoppingCart({currentUser, needFetch, setNeedFetch}) {
+
 
   //fetch the shopping cart items  
   useEffect(() => {
-    async function fetchShoppingCartItems() {
-        const res = await fetch(`/users/${currentUser.id}`)
-        if (res.ok) {
-            const user =  await res.json()
-            //update current user state 
-            setCurrentUser(user)
-            setShoppingCartItemList(user.shopping_cart.all_items_in_cart)
-            setIsShopingCartLoaded(true)
-        }
-    }
-    fetchShoppingCartItems()
-  },[needFetch])
+    setNeedFetch(!needFetch)
+  },[])
 
-  if (!isShopingCartLoaded) return <h2>Loading...</h2>;
-
-  console.log (currentUser, shoppingCartItemList)
+  const shoppingCartItemList = currentUser.shopping_cart.all_items_in_cart
+  // console.log (currentUser.shopping_cart.all_items_in_cart)
 
   return (
     <div>

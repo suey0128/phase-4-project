@@ -27,12 +27,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isUserLoaded, setisUserLoaded] = useState(false)
   const [errors, setErrors] = useState([]);
+  const [needFetch, setNeedFetch] = useState(false)
 
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
 
 
   //fetch user for testing. delete when login function is setup 
+
+
   // useEffect(() => {
   //   async function fetchUser(){
   //       const res = await fetch(`/users/1`)
@@ -47,6 +50,7 @@ function App() {
   // },[])
 
   // if (!isUserLoaded) return <h2>Loading...</h2>;
+
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -109,8 +113,6 @@ function App() {
   }
 
 
-console.log(cartItemInstances)
-
   return (
     <div className="App">
       <Router>
@@ -130,11 +132,11 @@ console.log(cartItemInstances)
           </Route>
 
           <Route path="/shoppingcart" >
-            <ShoppingCart currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+            <ShoppingCart currentUser={currentUser} needFetch={needFetch} setNeedFetch={setNeedFetch}/>
           </Route>
 
           <Route path="/checkout">
-            <Checkout/>
+            <Checkout currentUser={currentUser}/>
           </Route>
 
           <Route path="/user">

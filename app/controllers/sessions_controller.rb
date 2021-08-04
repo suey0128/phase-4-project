@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  
     def create
         #when a user login with username and pd, authenticate the info and find the id, 
         user = User.find_by(username: params[:user][:username])
@@ -10,7 +10,5 @@ class SessionsController < ApplicationController
             render json: { errors: ["Incorrect username and/or password"] }, status: :unauthorized
         end
     end
-
-
 
 end
