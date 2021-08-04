@@ -166,39 +166,40 @@ export default function Checkout({currentUser}) {
       }
 
       //POST a new shopping_cart instance (as purchase)
-      const newPurchase = {
-        user_id: currentUser.id,
-        paid: true,
-        first_name: fName,
-        last_name: fName,
-        shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
-      }
-      async function createPurchase () {
-        const res = await fetch(`shopping_carts`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newPurchase),
-        });
-        if (res.ok) {
-          const createdPurchase = await res.json();
-          console.log('createdPurchase', createdPurchase)
-          //POST a new payment instance connect (add new attr) and associate with this purchase 
-          createPayment(createdPurchase)
-        } else {
-          const err = await res.json()
-          setErrors(err.errors)
-        };
-      }
-      createPurchase();
-      
-      //clear out the current shopping cart instance
+      // const newPurchase = {
+      //   user_id: currentUser.id,
+      //   paid: true,
+      //   first_name: fName,
+      //   last_name: fName,
+      //   shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
+      // }
+      // async function createPurchase () {
+      //   const res = await fetch(`shopping_carts`, {
+      //     method: 'POST',
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(newPurchase),
+      //   });
+      //   if (res.ok) {
+      //     const createdPurchase = await res.json();
+      //     console.log('createdPurchase', createdPurchase)
+      //     //POST a new payment instance connect (add new attr) and associate with this purchase 
+      //     createPayment(createdPurchase)
+      //   } else {
+      //     const err = await res.json()
+      //     setErrors(err.errors)
+      //   };
+      // }
+      // createPurchase();
+
+      //clear out the current shopping cart instance by
       //figure out a way to change all the cartItem's shopping_cart_id to new purchase 
+      //add setActiveStep 
 
-
+    } else {
+    setActiveStep(activeStep + 1)
     }
-    setActiveStep(activeStep + 1);
   };
 
 
