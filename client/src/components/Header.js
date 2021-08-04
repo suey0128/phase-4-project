@@ -1,8 +1,8 @@
 import NavBar from "./Navbar"
-function Header () {
+function Header ({currentUser}) {
     return (
         <div>
-            <h2> <NavBar /> </h2>
+            <h2> <NavBar currentUser={currentUser} /> </h2>
         </div>
     )
   }

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  function NavBar() {
+  function NavBar({currentUser}) {
     const classes = useStyles();
   
     function handleLoginClick(){
@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
               Nail Code
             </Typography>
             </NavLink>
+            <br></br>
+              {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null }
             <NavLink to="/signup">
             <Button color="inherit"> Sign Up</Button>
             </NavLink>

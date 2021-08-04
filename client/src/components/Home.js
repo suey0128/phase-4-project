@@ -114,10 +114,10 @@ function Home ({showItemPage, setShowItemPage, onAddToCartClick}) {
             sortingPriceHighToLow(handCareOnDisplay, setHandCareOnDisplay, "LowToHigh")
         }
     }
-
-
+       
     return (
         <div>
+
             <HomeSearchAndSort onSearchChange={onSearchChange}
                                onSortBarChange={onSortBarChange}
                                setShowItemPage={setShowItemPage}

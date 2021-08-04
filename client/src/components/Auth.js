@@ -37,7 +37,7 @@ function Auth(setCurrentUser){
         const userData = await res.json();
         if(res.ok){
             console.log(userData)
-            setCurrentUser(userData)
+            // setCurrentUser(userData)
             debugger
             history.push('/')
         } else {
@@ -47,7 +47,7 @@ function Auth(setCurrentUser){
     };
     return(
         <>
-           <Form>
+           <Form onSubmit={handleSubmit}>
                <h1>Sign up</h1>
                <Input
                type= "text"
