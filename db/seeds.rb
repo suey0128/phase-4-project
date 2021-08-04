@@ -14,24 +14,24 @@ u3 = User.create(username: "kiana", first_name: "Kiana", last_name:"Smith", pass
 u4 = User.create(username: "ashely", first_name: "Ashely", last_name:"Walker", password_digest:User.digest('123'), billing_address:"555 Good Ave., Huston, TX, 97000, US ",shipping_address: "555 Good Ave., Huston, TX, 97000, US",email:"ashely@att.net",birthday: Date.parse('1998-05-12'))
 
 puts "Seeding shopping_cart..."
-sc1 = ShoppingCart.create(user_id: u1.id, paid: false)
-sc2 = ShoppingCart.create(user_id: u1.id, paid: true) #purchase
-sc3 = ShoppingCart.create(user_id: u2.id, paid: true) #purchase
-sc4 = ShoppingCart.create(user_id: u2.id, paid: true) #purchase
-sc5 = ShoppingCart.create(user_id: u2.id, paid: false)
-sc6 = ShoppingCart.create(user_id: u3.id, paid: false)
-sc7 = ShoppingCart.create(user_id: u3.id, paid: true) #purchase
-sc8 = ShoppingCart.create(user_id: u3.id, paid: true) #purchase
-sc9 = ShoppingCart.create(user_id: u4.id, paid: false)
-sc10 = ShoppingCart.create(user_id: u4.id, paid: true) #purchase
+sc1 = ShoppingCart.create(user_id: u1.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+sc2 = ShoppingCart.create(user_id: u1.id, paid: true, first_name: "Suey", last_name:"Yu", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US") #purchase
+sc3 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US" ) #purchase
+sc4 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US") #purchase
+sc5 = ShoppingCart.create(user_id: u2.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+sc6 = ShoppingCart.create(user_id: u3.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+sc7 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
+sc8 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
+sc9 = ShoppingCart.create(user_id: u4.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+sc10 = ShoppingCart.create(user_id: u4.id, paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US") #purchase
 
 puts "Seeding payment..."
-p1 = Payment.create(user_id: u1.id, shopping_cart_id: sc2.id)
-p2 = Payment.create(user_id: u1.id, shopping_cart_id: sc3.id)
-p3 = Payment.create(user_id: u2.id, shopping_cart_id: sc4.id)
-p4 = Payment.create(user_id: u3.id, shopping_cart_id: sc8.id)
-p5 = Payment.create(user_id: u4.id, shopping_cart_id: sc10.id)
-p6 = Payment.create(user_id: u3.id, shopping_cart_id: sc7.id)
+p1 = Payment.create(user_id: u1.id, shopping_cart_id: sc2.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p2 = Payment.create(user_id: u1.id, shopping_cart_id: sc3.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p3 = Payment.create(user_id: u2.id, shopping_cart_id: sc4.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p4 = Payment.create(user_id: u3.id, shopping_cart_id: sc8.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p5 = Payment.create(user_id: u4.id, shopping_cart_id: sc10.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p6 = Payment.create(user_id: u3.id, shopping_cart_id: sc7.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
 
 puts "Seeding press_On..."
 po1 = PressOn.create(name:"Lavender Touch",image:"https://img.ltwebstatic.com/images3_pi/2020/08/13/15972989601bf97065e3dc9934dbba3da1c9c7fee3_thumbnail_900x.webp", shape:"coffin",color:"purple", add_on:"", description:"Long,lavender, and coffin ", price:30.50, quantity:10, item_type:"PressOn" )

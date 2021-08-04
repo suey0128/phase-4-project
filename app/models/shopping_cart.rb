@@ -10,7 +10,7 @@ class ShoppingCart < ApplicationRecord
     has_many :hand_cares, through: :cart_items, source: :item, source_type: "HandCare"
 
     def all_items_in_cart
-        self.cart_items.map{|i| {quantity: i.in_cart_quantity, item: i.item, cart_item_id: i.id}}
+        self.cart_items.map{|i| {quantity: i.in_cart_quantity, item: i.item, cart_item_id: i.id, item_total: i.item_total}}
     end
 
     def total_amount

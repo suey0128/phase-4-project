@@ -74,7 +74,9 @@ function getStepContent(step, passToAddress, passToPayment, currentUser) {
     case 1:
       return <PaymentForm passToPayment={passToPayment}/>;
     case 2:
-      return <Review currentUser={currentUser}/>;
+      return <Review currentUser={currentUser}
+                    passToAddress={passToAddress}
+      />;
     default:
       throw new Error('Unknown step');
   }
@@ -82,18 +84,6 @@ function getStepContent(step, passToAddress, passToPayment, currentUser) {
 
 export default function Checkout({currentUser}) {
   // console.log(currentUser)
-
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
-
   const [fName, setFname] = useState(currentUser.first_name)
   const [lName, setLname] = useState(currentUser.last_name)
   const [address, setAddress] = useState(currentUser.shipping_address.split(', ')[0])
@@ -110,6 +100,116 @@ export default function Checkout({currentUser}) {
   const [expiry, setExpiry] = useState("")
   const [cvv, setCvv] = useState("")
   const passToPayment = [nameOnCard, setNameOnCard, cardNum, setCardNum, expiry, setExpiry, cvv, setCvv]
+
+  let subtotal = parseFloat(currentUser.shopping_cart.total_amount).toFixed(2)
+  let tax = (parseFloat(currentUser.shopping_cart.total_amount) * 0.065).toFixed(2)
+  let shipping = parseFloat(7.99)
+  let total = parseFloat(subtotal) + parseFloat(tax) + parseFloat(shipping)
+
+
+  const [errors, setErrors] = useState([]);
+
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  //POST a new payment instance connect (add new attr)
+  async function createPayment (createdPurchase) {
+    const res = await fetch(`payments`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        shopping_cart_id: createdPurchase.id,
+        total: total,
+        subtotal: subtotal,
+        tax: tax,
+        shipping: shipping
+      }),
+    });
+    if (res.ok) {
+      const createdPayment = await res.json();
+      console.log('createdPayment', createdPayment)
+    } else {
+      const err = await res.json()
+      setErrors(err.errors)
+    };
+  }
+
+  const handleNext = () => {
+    if (activeStep === 2) {
+      //if box is check, PATCH user's shipping address
+      if (saveAdd) {
+        const updateUser = {
+          first_name: fName,
+          last_name: lName, 
+          shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
+        };
+        async function updateShipping () {
+          const res = await fetch(`users/${currentUser.id}`, {
+            method: 'PATCH',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateUser),
+          });
+          if (res.ok) {
+            const updatedUser = await res.json();
+            console.log('address patched', updatedUser)
+          } else {
+            const err = await res.json()
+            setErrors(err.errors)
+          };
+        }
+        updateShipping();
+      }
+
+      //POST a new shopping_cart instance (as purchase)
+      const newPurchase = {
+        user_id: currentUser.id,
+        paid: true,
+        first_name: fName,
+        last_name: fName,
+        shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
+      }
+      async function createPurchase () {
+        const res = await fetch(`shopping_carts`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPurchase),
+        });
+        if (res.ok) {
+          const createdPurchase = await res.json();
+          console.log('createdPurchase', createdPurchase)
+          //POST a new payment instance connect (add new attr) and associate with this purchase 
+          createPayment(createdPurchase)
+        } else {
+          const err = await res.json()
+          setErrors(err.errors)
+        };
+      }
+      createPurchase();
+      
+      //clear out the current shopping cart instance
+      //figure out a way to change all the cartItem's shopping_cart_id to new purchase 
+
+
+    }
+    setActiveStep(activeStep + 1);
+  };
+
+
+
+  // console.log(`${address}, ${city}, ${state} ${zipCode}, ${country}`)
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+
 
   return (
     <React.Fragment>

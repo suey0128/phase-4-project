@@ -33,9 +33,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review({currentUser}) {
-   const items = currentUser.shopping_cart.all_items_in_cart
+export default function Review({currentUser, passToAddress}) {
   const classes = useStyles();
+
+  const checkoutItems = currentUser.shopping_cart.all_items_in_cart
+  console.log(currentUser.shopping_cart)
+  let subtotal = parseFloat(currentUser.shopping_cart.total_amount).toFixed(2)
+  let tax = (parseFloat(currentUser.shopping_cart.total_amount) * 0.065).toFixed(2)
+  let shipping = parseFloat(7.99)
+  let total = parseFloat(subtotal) + parseFloat(tax) + parseFloat(shipping)
+
+
 
   return (
     <React.Fragment>
@@ -43,44 +51,69 @@ export default function Review({currentUser}) {
         Order summary
       </Typography>
       <List disablePadding>
-        {items.map((product) => (
+        {checkoutItems.map((product) => (
           <ListItem className={classes.listItem} key={product.cart_item_id}>
             <ListItemText primary={product.item.name} secondary={product.item.description} />
-            <Typography variant="body2">{product.item.price}</Typography>
+            <Typography variant="body2">$ {product.item_total}</Typography>
           </ListItem>
         ))}
+
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            $ {total}
           </Typography>
         </ListItem>
+
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Subtotal" />
+          <Typography variant="subtitle2" className={classes.total}>
+            $ {subtotal}
+          </Typography>
+        </ListItem>
+
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Tax" />
+          <Typography variant="subtitle2" className={classes.total}>
+            $ {tax}
+          </Typography>
+        </ListItem>
+
+        <ListItem className={classes.listItem}>
+          <ListItemText primary="Shipping" />
+          <Typography variant="subtitle1" className={classes.total}>
+            $ {shipping}
+          </Typography>
+        </ListItem>
+
+
+
       </List>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{`${passToAddress[0]} ${passToAddress[2]}`}</Typography>
+          <Typography gutterBottom>{`${passToAddress[4]}, ${passToAddress[6]}, ${passToAddress[8]} ${passToAddress[10]}, ${passToAddress[12]}`}</Typography>
         </Grid>
-        <Grid item container direction="column" xs={12} sm={6}>
+        {/* <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Payment details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
+       
+              <React.Fragment >
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                  <Typography gutterBottom>Card Holder</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
+                  <Typography gutterBottom>???</Typography>
                 </Grid>
               </React.Fragment>
-            ))}
+           
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
