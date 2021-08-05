@@ -1,7 +1,18 @@
-function UserPurchase () {
+import {  Link } from "react-router-dom";
+
+
+function UserPurchase ({purchase}) {
+
+    console.log(purchase)
+
+
     return (
         <div>
-            <h2>this is UserPurchase</h2>
+            <Link to={`/purchase/${purchase.id}`}>
+                <h3 >order: #{purchase.id}</h3>
+            </Link>
+            <p>order date: {purchase.updated_at}</p>
+
         </div>
     )
   }

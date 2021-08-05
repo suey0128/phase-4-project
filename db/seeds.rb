@@ -25,15 +25,15 @@ puts "Seeding shopping_cart..."
 # sc9 = ShoppingCart.create(user_id: u4.id, paid: false, first_name: "", last_name:"", shipping_address: "")
 # sc10 = ShoppingCart.create(user_id: u4.id, paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US") #purchase
 
-sc1 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc1 = ShoppingCart.create(paid: false, first_name: "n/a", last_name:"n/a", shipping_address: "n/a", address: "n/a", city: "n/a", state: "na", zip: "00000", country: "n/a")
 sc2 = ShoppingCart.create(paid: true, first_name: "Suey", last_name:"Yu", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
 sc3 = ShoppingCart.create(paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US" ) #purchase
 sc4 = ShoppingCart.create(paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
-sc5 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
-sc6 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc5 = ShoppingCart.create(paid: false, first_name: "n/a", last_name:"n/a", shipping_address: "n/a", address: "n/a", city: "n/a", state: "na", zip: "00000", country: "n/a")
+sc6 = ShoppingCart.create(paid: false, first_name: "n/a", last_name:"n/a", shipping_address: "n/a", address: "n/a", city: "n/a", state: "na", zip: "00000", country: "n/a")
 sc7 = ShoppingCart.create(paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
 sc8 = ShoppingCart.create(paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
-sc9 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc9 = ShoppingCart.create(paid: false, first_name: "n/a", last_name:"n/a", shipping_address: "n/a", address: "n/a", city: "n/a", state: "na", zip: "00000", country: "n/a")
 sc10 = ShoppingCart.create(paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
 
 puts "Seeding current_cart..."

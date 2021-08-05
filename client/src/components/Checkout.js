@@ -135,7 +135,7 @@ export default function Checkout({currentUser}) {
     };
   }
 
-console.log(currentUser)
+// console.log(currentUser)
 
   const handleNext = () => {
 
@@ -166,7 +166,7 @@ console.log(currentUser)
           setActiveStep(activeStep + 1)
         } else {
           const err = await res.json()
-          setErrors(err.errors)
+          alert(err.errors)
         };
       }
       updateShoppingCartShippingInfo();
@@ -185,11 +185,21 @@ console.log(currentUser)
             console.log('address patched in user', updatedUser)
           } else {
             const err = await res.json()
-            setErrors(err.errors)
+            alert(err.errors)
           };
         }
         updateUserDefaltAddress();
       }
+    }
+
+    // Credit card btn : control the state of input
+    else if (activeStep === 1) {
+      // const passToPayment = [nameOnCard, setNameOnCard, cardNum, setCardNum, expiry, setExpiry, cvv, setCvv]
+      if (nameOnCard.length === 0) {alert("Please enter your name on card") } 
+      else if (cardNum.length !== 16 || isNaN(cardNum)) {alert("Please enter valid card number. xxxx-xxxx-xxxx-xxxx") }
+      else if (expiry.length !==5 ) {alert("Please enter valid expiration date. xx/xx")}
+      else if (cvv.length !==3 ) {alert("Please enter valid cvv number. A 3 digit number")}
+      else { setActiveStep(activeStep + 1) }
     }
     // PLACE ORDER BTN
     else if (activeStep === 2) {
@@ -235,13 +245,13 @@ console.log(currentUser)
 
       //3) create a new shopping cart for the currentUser
       const newEmptyShoppingCart = {
-        first_name: "",
-        last_name: "",
-        address: "",
-        city: "", 
-        state: "", 
-        zip: "", 
-        country: ""
+        first_name: "n/a",
+        last_name: "n/a",
+        address: "n/a",
+        city: "n/a", 
+        state: "na", 
+        zip: "00000", 
+        country: "n/a"
       }
       async function createEmptyShoppingCart () {
         const res = await fetch(`http://localhost:3000/shopping_carts`, {

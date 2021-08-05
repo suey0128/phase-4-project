@@ -4,11 +4,10 @@ class UserSerializer < ActiveModel::Serializer
              :address, :city, :state, :zip, :country
   
   has_one :shopping_cart, through: :current_cart
+  has_many :payments
   has_many :purchases, through: :payments
 
-  def in_cart_item_instances
-    self.object.shopping_cart.cart_items
-  end
+
 
   def items
     items = []

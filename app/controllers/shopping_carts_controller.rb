@@ -3,7 +3,7 @@ class ShoppingCartsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def index
-        shopping_carts = ShoppingCart.all
+        shopping_carts = ShoppingCart.all.order(updated_at: :asc)
         render json: shopping_carts
     end
 
@@ -14,7 +14,7 @@ class ShoppingCartsController < ApplicationController
 
     def update
         shopping_cart = ShoppingCart.find(params[:id])
-        shopping_cart.update(shopping_cart_params)
+        shopping_cart.update!(shopping_cart_params)
         render json: shopping_cart
     end
 

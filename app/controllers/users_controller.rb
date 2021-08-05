@@ -31,13 +31,13 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        user.update(user_params)
+        user.update!(user_params)
         render json: user
     end
     private
 
     def user_params
-        params.require(:user).permit(:name, :password, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
+        params.require(:user).permit(:username, :first_name, :last_name, :password, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
     end
 
     def render_not_found_response
