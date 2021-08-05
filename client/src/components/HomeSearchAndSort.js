@@ -5,15 +5,6 @@ function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) 
 
     return (
         <div>
-
-            <Link to="/shoppingcart">
-                <button>Shopping Cart</button>
-            </Link>
-
-
-            <Link to="/me">
-                <button>me</button>
-            </Link>
             
             <div className="look-for-div">
                 <p>Looking for:</p>

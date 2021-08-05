@@ -23,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
   
   function NavBar({currentUser,onLogout}) {
     const classes = useStyles();
-  
-    function handleLoginClick(){
-        console.log("I was clicked")
-    }
 
     function handleLogout() {
         fetch("/logout", {
@@ -47,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
               Nail Code
             </Typography>
             </NavLink>
-              {/* {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null } */}
             <NavLink to="/signup">
             <Button color="inherit"> Sign Up</Button>
             </NavLink>
@@ -55,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
             <Button color="inherit">Login</Button>
             </NavLink>
             <Button  color="inherit" onClick={handleLogout}>Logout</Button>
+
+            <NavLink to="/shoppingcart">
+            <Button color="inherit">Shopping cart</Button>
+            </NavLink>
+
+            <NavLink to="/me">
+            <Button color="inherit">Profile</Button>
+            </NavLink>
           </Toolbar>
         </AppBar>
     
