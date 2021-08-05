@@ -7,8 +7,8 @@ import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
 import User from './User';
 import PurchaseDetail from './PurchaseDetail';
-import SignUp from './SignUp';
 import Login from './Login';
+import Auth from './Auth';
 
 
 import { 
@@ -143,7 +143,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser} onLogout={onLogout} />
 
         <Switch>
           <Route exact path="/">
@@ -181,7 +181,7 @@ function App() {
           </Route>
 
            <Route exact path="/signup">
-               <SignUp />
+               <Auth />
            </Route>
 
         </Switch>

@@ -7,10 +7,13 @@ function Auth(setCurrentUser){
     const [lastname,setLastname]=useState('')
     const [username,setUsername]=useState('')
     const [password,setPassword]=useState('')
-    const [shippingaddress,setShippingAddress]=useState('')
-    const [billingaddress,setBillingAddress]=useState('')
-    const [birthday,setBirthday]=useState('')
+    const [address,setAddress]=useState('')
+    const [state,setState]=useState('')
+    const [city,setCity]=useState('')
+    const [zip,setZip]=useState('')
+    const [country,setCountry]=useState('')
     const [email,setEmail]=useState('')
+    const [birthday,setBirthday]=useState('')
     const [errors, setErrors] = useState(null)
 
     const history = useHistory();
@@ -22,10 +25,13 @@ function Auth(setCurrentUser){
             password,
             email,
             birthday,
-            first_name:firstname,
-            last_name:lastname,
-            billing_address:billingaddress,
-            shipping_address:shippingaddress
+            first_name: "n/a",
+            last_name: "n/a",
+            address: "n/a",
+            city: "n/a", 
+            state: "na", 
+             zip: "00000", 
+           country: "n/a"
         }
         const res = await fetch(`http://localhost:3000/users`,{
             method: 'POST',
@@ -47,8 +53,8 @@ function Auth(setCurrentUser){
     };
     return(
         <>
+            <h1>Sign up</h1>
            <Form onSubmit={handleSubmit}>
-               <h1>Sign up</h1>
                <Input
                type= "text"
                placeholder="First Name"
@@ -76,16 +82,34 @@ function Auth(setCurrentUser){
            onChange={(e) => setEmail(e.target.value)}/>
            <Input
              type= "text"
-             placeholder="Shipping Address"
-             value={shippingaddress}
-             name="shippingaddress"
-             onChange={(e) => setShippingAddress(e.target.value)}/>
+             placeholder="Address"
+             value={address}
+             name="address"
+             onChange={(e) => setAddress(e.target.value)}/>
              <Input
              type= "text"
-             placeholder="Billing Address"
-             value={billingaddress}
-             name="billingaddress"
-             onChange={(e) => setBillingAddress(e.target.value)}/>
+             placeholder="City"
+             value={city}
+             name="city"
+             onChange={(e) => setCity(e.target.value)}/>
+                <Input
+             type= "text"
+             placeholder="State"
+             value={state}
+             name="state"
+             onChange={(e) => setState(e.target.value)}/>
+                <Input
+             type= "text"
+             placeholder="Zip Code"
+             value={zip}
+             name="zip"
+             onChange={(e) => setZip(e.target.value)}/>
+               <Input
+             type= "text"
+             placeholder="Country"
+             value={country}s
+             name="country"
+             onChange={(e) => setCountry(e.target.value)}/>
              <Input
              type= "text"
              placeholder="Birthday"
