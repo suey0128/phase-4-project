@@ -12,4 +12,13 @@ class SessionsController < ApplicationController
         # byebug #=> session[:user_id] = 1 , created
     end
 
+<<<<<<< HEAD
+    def destroy
+        session.delete :user_id
+        head :no_content
+      end 
+
+
+=======
+>>>>>>> main
 end

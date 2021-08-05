@@ -21,12 +21,18 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  function NavBar({currentUser}) {
+  function NavBar({currentUser,onLogout}) {
     const classes = useStyles();
   
     function handleLoginClick(){
         console.log("I was clicked")
     }
+
+    function handleLogout() {
+        fetch("/logout", {
+          method: "DELETE",
+        }).then(() => onLogout());
+      }
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -34,19 +40,20 @@ const useStyles = makeStyles((theme) => ({
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
+            {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null }
             <NavLink to="/">
             <Typography variant="h6" className={classes.title}>
               Nail Code
             </Typography>
             </NavLink>
-            <br></br>
-              {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null }
+              {/* {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null } */}
             <NavLink to="/signup">
             <Button color="inherit"> Sign Up</Button>
             </NavLink>
             <NavLink to="/login">
             <Button color="inherit">Login</Button>
             </NavLink>
+            <Button  color="inherit" onClick={handleLogout}>Logout</Button>
           </Toolbar>
         </AppBar>
     

@@ -132,7 +132,13 @@ function App() {
       createCartItem();
     };
   }
+  function onLogin(user) {
+    currentUser(user);
+  }
 
+  function onLogout() {
+    currentUser(null);
+  }
 
   return (
     <div className="App">
