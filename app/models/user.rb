@@ -16,8 +16,18 @@ class User < ApplicationRecord
         BCrypt::Password.create(string, cost: cost)
     end
 
+    def in_cart_item_instances
+        self.shopping_cart.cart_items
+    end
+
+    validates :username, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true
     validates :first_name, presence: true, length: { in: 2..20 }
     validates :last_name, presence: true, length: { in: 2..20 }
-    validates :shipping_address, presence: true, length: { in: 2..150 }
+    validates :address, presence: true, length: { in: 2..100 }
+    validates :city, presence: true, length: { in: 2..30 }
+    validates :state, presence: true, length: { is: 2 }
+    validates :zip, presence: true, length: { is: 5 }, numericality: { only_integer: true }
+    validates :country, presence: true, length: { in: 2..20 } 
     
 end

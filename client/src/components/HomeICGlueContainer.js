@@ -1,8 +1,5 @@
 import HomeICItemCard from "./HomeICItemCard";
 
-import React, { useState, useEffect } from "react";
-// react-router-dom Imports
-import { Link } from 'react-router-dom';
 
 //import css from material ui
 import { makeStyles } from '@material-ui/core/styles';

@@ -1,5 +1,5 @@
 // react-router-dom Imports
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Grid from '@material-ui/core/Grid';
 
@@ -24,7 +24,7 @@ function HomeICItemCard({item, onAddToCartClick}) {
         <Grid item xs={6} sm={3}>
                 <div >
   
-                    <img onClick={handleItemPhotoClick} className="img-in-card" src={item.image} />
+                    <img onClick={handleItemPhotoClick} className="img-in-card" src={item.image} alt={item.name}/>
 
                     <div className="info-container">
                         <h3 className="item-name">{item.name}</h3>

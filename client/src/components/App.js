@@ -46,7 +46,7 @@ function App() {
         }
     }
     fetchUser()
-  },[])
+  },[needFetch])
 
   if (!isUserLoaded) return <h2>Loading...</h2>;
   
@@ -79,10 +79,8 @@ function App() {
     let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
     //is this item alreay in cart? yes - PATCH, no - POST
     if (itemAlreadyInCart) {
-      console.log( itemAlreadyInCart )
       // PATCH
       let totalQuantity = itemAlreadyInCart.in_cart_quantity + quantity
-      console.log(totalQuantity)
       async function updateCartItem() {
         const res = await fetch(`/cart_items/${itemAlreadyInCart.id}`, {
           method: "PATCH",
@@ -95,6 +93,7 @@ function App() {
           //update the state
           let deletedOldInstance = cartItemInstances.filter(i=> i !== itemAlreadyInCart)
           setCartItemInstances([...deletedOldInstance, itemInCartUpdated])
+          setNeedFetch(!needFetch)
         } else {
           const error = await res.json()
           setErrors(error.message)
@@ -124,6 +123,7 @@ function App() {
           //update the state
           console.log(addedToCartItem)
           setCartItemInstances([...cartItemInstances, addedToCartItem])
+          setNeedFetch(!needFetch)
         } else {
           const error = await res.json()
           setErrors(error.message)
@@ -160,8 +160,8 @@ function App() {
             <Checkout currentUser={currentUser}/>
           </Route>
 
-          <Route path="/user">
-            <User />
+          <Route path="/me">
+            <User currentUser={currentUser}/>
           </Route>
 
           <Route path="/items/:type/:id">
@@ -170,7 +170,7 @@ function App() {
                             />
           </Route>
 
-          <Route path="/purchasedetail">
+          <Route path="/purchase/:purchase_id">
             <PurchaseDetail />
           </Route>
 
