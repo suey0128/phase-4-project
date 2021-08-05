@@ -33,44 +33,44 @@ function App() {
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
 
-  // fetch user for testing. delete when login function is setup 
-  useEffect(() => {
-    async function fetchUser(){
-        // const res = await fetch(`/me`) //=> users#show
-        const res = await fetch(`users/1`)
-        if (res.ok) {
-            const user =  await res.json()
-            setCurrentUser(user)
-            setCartItemInstances(user.in_cart_item_instances)
-            setisUserLoaded(true)
-        }
-    }
-    fetchUser()
-  },[needFetch])
-
-  if (!isUserLoaded) return <h2>Loading...</h2>;
-  
-  
-
-  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
-
+  // // fetch user for testing. delete when login function is setup 
   // useEffect(() => {
-  //   // auto-login
-  //   fetch("/me", 
-  //   // {
-  //   //   credentials: "include"
-  //   // }
-  //   ).then((r) => {  //get '/me/' => 'users#show' in routes.rb
-  //     if (r.ok) {
-  //       r.json().then((user) => {
-  //         setCurrentUser(user)
-  //         setCartItemInstances(user.in_cart_item_instances)
-  //       });
-  //     }
-  //   });
-  // }, []);
+  //   async function fetchUser(){
+  //       // const res = await fetch(`/me`) //=> users#show
+  //       const res = await fetch(`users/1`)
+  //       if (res.ok) {
+  //           const user =  await res.json()
+  //           setCurrentUser(user)
+  //           setCartItemInstances(user.in_cart_item_instances)
+  //           setisUserLoaded(true)
+  //       }
+  //   }
+  //   fetchUser()
+  // },[needFetch])
+
+  // if (!isUserLoaded) return <h2>Loading...</h2>;
+  
+  
 
   // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
+
+  useEffect(() => {
+    // auto-login
+    fetch("/me", 
+    {
+      credentials: "include"
+    }
+    ).then((r) => {  //get '/me/' => 'users#show' in routes.rb
+      if (r.ok) {
+        r.json().then((user) => {
+          setCurrentUser(user)
+          setCartItemInstances(user.in_cart_item_instances)
+        });
+      }
+    });
+  }, []);
+
+  if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
 
 
   const onAddToCartClick = (e, quantity, item) => {
