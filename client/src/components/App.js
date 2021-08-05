@@ -126,7 +126,13 @@ function App() {
       createCartItem();
     };
   }
+  function onLogin(user) {
+    currentUser(user);
+  }
 
+  function onLogout() {
+    currentUser(null);
+  }
 
 console.log(cartItemInstances)
 

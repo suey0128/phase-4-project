@@ -117,7 +117,6 @@ function Home ({showItemPage, setShowItemPage, onAddToCartClick}) {
        
     return (
         <div>
-
             <HomeSearchAndSort onSearchChange={onSearchChange}
                                onSortBarChange={onSortBarChange}
                                setShowItemPage={setShowItemPage}

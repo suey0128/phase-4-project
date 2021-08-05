@@ -27,7 +27,7 @@ function Auth(setCurrentUser){
             billing_address:billingaddress,
             shipping_address:shippingaddress
         }
-        const res = await fetch(`http://localhost:3001/users`,{
+        const res = await fetch(`http://localhost:3000/users`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

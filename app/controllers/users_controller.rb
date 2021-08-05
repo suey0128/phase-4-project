@@ -13,19 +13,17 @@ class UsersController < ApplicationController
     end
 
     def show 
-        byebug
         user =User.find_by(id: session[:user_id])
         if user
         render json: user
         else 
-          render json: {error:"Not authorized"},status: unauthorized: 
-        end
-      end 
+          render json: {error:"Not authorized"},status: :unauthorized
+         end 
     end
     private
 
     def user_params
-        params.require(:user).permit(:name, :password, :billing_address, :shipping_address, :email, :birthday)
+        params.require(:user).permit(:username,:first_name,:last_name,:password, :billing_address, :shipping_address, :email, :birthday)
     end
 
     def render_not_found_response

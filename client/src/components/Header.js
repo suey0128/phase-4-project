@@ -1,8 +1,8 @@
 import NavBar from "./Navbar"
-function Header ({currentUser}) {
+function Header ({currentUser,onLogin,onLogout}) {
     return (
         <div>
-            <h2> <NavBar currentUser={currentUser} /> </h2>
+            <h2> <NavBar onLogin={onLogin} onLogout={onLogout} currentUser={currentUser} /> </h2>
         </div>
     )
   }
