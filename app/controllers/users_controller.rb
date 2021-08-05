@@ -12,6 +12,7 @@ class UsersController < ApplicationController
         render json: user
     end
 
+
     def show
         #when the user signup, the id is stored in session(cookie), find the user using cookie
         user = User.find_by(id: session[:user_id])
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
     #     user = User.find(params[:id])
     #     render json: user
     # end
+
 
     def update
         user = User.find(params[:id])
