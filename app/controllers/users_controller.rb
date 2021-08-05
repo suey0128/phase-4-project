@@ -9,6 +9,9 @@ class UsersController < ApplicationController
 
     def create
         user = User.create!(user_params)
+        shopping_cart = ShoppingCart.create!(paid: false, first_name: "n/a", last_name:"n/a", shipping_address: "n/a", address: "n/a", city: "n/a", state: "na", zip: "00000", country: "n/a")
+        current_cart = CurrentCart.create!(user_id: user.id, shopping_cart_id: shopping_cart.id)
+        session[:user_id] = user.id
         render json: user
     end
 
@@ -24,11 +27,6 @@ class UsersController < ApplicationController
         end
     end
 
-    # def show
-
-    #     user = User.find(params[:id])
-    #     render json: user
-    # end
 
 
     def update
@@ -39,8 +37,17 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :first_name, :last_name, :password, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
+        params.require(:user).permit(:username, :first_name, :last_name, :password, :password_confirmation, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
     end
+
+    # def shopping_cart_params
+    #     params.permit(:paid, :first_name, :last_name, :address, :city, :state, :zip, :country)
+    # end
+
+
+    # def current_cart_params
+    #     params.require(:current_cart).permit(:user_id, :shopping_cart_id)
+    # end
 
     def render_not_found_response
         render json: {error: "User not found"}, status: :not_found

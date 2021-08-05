@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
-            {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null }
+            {currentUser ? <h2>Welcome Back {currentUser.username}</h2> : null }
             <NavLink to="/">
             <Typography variant="h6" className={classes.title}>
               Nail Code
@@ -56,16 +56,18 @@ const useStyles = makeStyles((theme) => ({
 
               <Button  color="inherit" onClick={handleLogout}>Logout</Button>
 
-            </div> : null }
-
-            <NavLink to="/signup">
-            <Button color="inherit"> Sign Up</Button>
-            </NavLink>
-            
-            <NavLink to="/login">
-            <Button color="inherit">Login</Button>
-            </NavLink>
-
+            </div> 
+            : 
+            <div>
+              <NavLink to="/signup">
+              <Button color="inherit"> Sign Up</Button>
+              </NavLink>
+              
+              <NavLink to="/login">
+              <Button color="inherit">Login</Button>
+              </NavLink>
+            </div>
+            }
           </Toolbar>
         </AppBar>
     
