@@ -16,3 +16,30 @@
   height: 40vh;
   object-fit: cover
 }
+
+.userInfoPage{
+  text-align: center;
+}
+
+.userinfo{
+  font-weight:700;
+}
+.userInfoTitle{
+  font-weight:700;
+  font-size:35px;
+}
+
+.sText{
+  font-weight:700;
+  font-size:15px;
+}
+.homePageButton{
+  border-radius:15px;
+  font-weight: 600;
+}
+.search-div{
+  padding-top:25px;
+}
+.pressOnPageLabels{
+  font-weight:600;
+}

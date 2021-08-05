@@ -6,7 +6,7 @@ function HomeICPressOnFilter({onHandleColorCheckBoxChange, onHandleShapeCheckBox
     return (
         <div>
             <div className="color-filter">
-                <p>color</p>
+                <p className="pressOnPageLabels">Color</p>
                 <input type="checkbox" id="all" name="all" value="all"  onChange={onHandleColorCheckBoxChange}/>
                 <label >multi colors</label>
                 <input type="checkbox" id="white" name="white" value="white"  onChange={onHandleColorCheckBoxChange}/>
@@ -32,7 +32,7 @@ function HomeICPressOnFilter({onHandleColorCheckBoxChange, onHandleShapeCheckBox
             </div>
 
             <div className="shape-filter">
-                <p>shape</p>
+                <p className="pressOnPageLabels">Shape</p>
                 <input type="checkbox" id="coffin" name="coffin" value="coffin" onChange={onHandleShapeCheckBoxChange}/>
                 <label >coffin</label>
                 <input type="checkbox" id="round" name="round" value="round" onChange={onHandleShapeCheckBoxChange}/>
@@ -44,7 +44,7 @@ function HomeICPressOnFilter({onHandleColorCheckBoxChange, onHandleShapeCheckBox
             </div>
 
             <div className="add-on-filter">
-                <p>add on</p>
+                <p className="pressOnPageLabels">Add Ons</p>
                 <input type="checkbox" id="jewels" name="jewels" value="jewels" onChange={onHandleAddOnCheckBoxChange}/>
                 <label >jewels</label>
                 <input type="checkbox" id="others" name="others" value="others" onChange={onHandleAddOnCheckBoxChange}/>

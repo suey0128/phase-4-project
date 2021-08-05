@@ -1,16 +1,15 @@
 import {Link} from "react-router-dom";
 
 function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) {
-
-
+   ;
     return (
         <div>
             
             <div className="look-for-div">
-                <p>Looking for:</p>
-                <button onClick={()=>{setShowItemPage("pressOn")}}>Press On</button>
-                <button onClick={()=>{setShowItemPage("glue")}}>Glue</button>
-                <button onClick={()=>{setShowItemPage("handCare")}}>Hand Care</button>
+                <p className="sText">Search For ...</p>
+                <button  className="homePageButton" onClick={()=>{setShowItemPage("pressOn")}}>Press On</button>
+                <button  className="homePageButton" onClick={()=>{setShowItemPage("glue")}}>Glue</button>
+                <button  className="homePageButton"  onClick={()=>{setShowItemPage("handCare")}}>Hand Care</button>
             </div>
             
 
