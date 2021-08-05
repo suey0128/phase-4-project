@@ -36,28 +36,40 @@ const useStyles = makeStyles((theme) => ({
           <Toolbar>
             {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
-            </IconButton> */}
-            {currentUser ? <h2>Welcome Back {currentUser.first_name}</h2> : null }
+
+            </IconButton>
+            {currentUser ? <h2>Welcome Back {currentUser.username}</h2> : null }
+
             <NavLink to="/">
             <Typography variant="h6" className={classes.title}>
               Nail Code
             </Typography>
             </NavLink>
-            <NavLink to="/signup">
-            <Button color="inherit"> Sign Up</Button>
-            </NavLink>
-            <NavLink to="/login">
-            <Button color="inherit">Login</Button>
-            </NavLink>
-            <Button  color="inherit" onClick={handleLogout}>Logout</Button>
 
-            <NavLink to="/shoppingcart">
-            <Button color="inherit">Shopping cart</Button>
-            </NavLink>
+            {currentUser ? 
+            <div>
+              <NavLink to="/shoppingcart">
+              <Button color="inherit">Shopping cart</Button>
+              </NavLink>
 
-            <NavLink to="/me">
-            <Button color="inherit">Profile</Button>
-            </NavLink>
+              <NavLink to="/me">
+              <Button color="inherit">Profile</Button>
+              </NavLink> 
+
+              <Button  color="inherit" onClick={handleLogout}>Logout</Button>
+
+            </div> 
+            : 
+            <div>
+              <NavLink to="/signup">
+              <Button color="inherit"> Sign Up</Button>
+              </NavLink>
+              
+              <NavLink to="/login">
+              <Button color="inherit">Login</Button>
+              </NavLink>
+            </div>
+            }
           </Toolbar>
         </AppBar>
     

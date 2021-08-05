@@ -27,7 +27,7 @@ function Login({setCurrentUser}){
         if(userData.id){
             console.log(userData)
             setCurrentUser(userData)
-            // history.push('/')
+            history.push('/')
         } else {
             setErrors(userData.message)
         }
