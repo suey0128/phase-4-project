@@ -67,7 +67,7 @@ po11 = PressOn.create(name:"Under The Sea",image:"https://i.ytimg.com/vi/5j341Pr
 po12 = PressOn.create(name: "On That french Tip",image:"https://styleeasily.com/wp-content/uploads/2017/04/28180417-coffin-nail-ideas-.jpg", shape:"coffin",color:"nude", add_on:"french tip", description:"Short nail with French tip", price:30.00, quantity:5, item_type:"PressOn")
 po13 = PressOn.create(name: "Ice Me Out",image:"https://i.ebayimg.com/00/s/ODAwWDgwMA==/z/bpcAAOSw6o9dQUfY/$_10.JPG?set_id=880000500F", shape:"square",color:"all", add_on:"jewels", description:"Long sleek, covered in Rhinestones", price:70.00, quantity:3, item_type:"PressOn")
 po14 = PressOn.create(name: "Sprinkles", image:"https://i0.wp.com/cherrycherrybeauty.com/wp-content/uploads/2016/12/Easy-and-Cute-Glitter-Nails-8.jpg?resize=730%2C730", shape:"square",color:"white", add_on:"sparkles", description:"Medium legnth ombre with sparkles", price:50.00, quantity:10, item_type:"PressOn")
-po15 = PressOn.create(name: "Midnight Dreams",image:"https://m.media-amazon.com/images/I/71I1snTOr7L._SX679_.jpg", shape:"round",color:"black", add_on:"", description:"Round black and Matte", price:20.00 , quantity:14 , item_type:"press_on")
+po15 = PressOn.create(name: "Midnight Dreams",image:"https://m.media-amazon.com/images/I/71I1snTOr7L._SX679_.jpg", shape:"round",color:"black", add_on:"", description:"Round black and Matte", price:20.00 , quantity:14 , item_type:"PressOn")
 po16 = PressOn.create(name: "Flaming",image:"https://img.ltwebstatic.com/images3_pi/2020/08/13/15972974972272ddc37480ea31b4a490d2edb2a178_thumbnail_900x.webp", shape:"coffin",color:"white", add_on:"", description:"Nude background with white flames", price:30.50, quantity:13 , item_type:"PressOn")
 
 puts "Seeding glue..."

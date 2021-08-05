@@ -32,7 +32,7 @@ function HomeICPressOnContainer({pressOnOnDisplay, setPressOnOnDisplay, pressOnA
     }
   },[filteredArr])
 
-
+console.log(pressOnOnDisplay)
   //handle all types of check boxes call back
   let obj = {}
   const handleAllCheckBox = (e, type) => {
