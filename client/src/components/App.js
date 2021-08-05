@@ -6,10 +6,9 @@ import ItemDetailPage from './ItemDetailPage';
 import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
 import User from './User';
-import PurchaseDetail from './PurchaseDetail'
-import SignUp from './SignUp'
+import PurchaseDetail from './PurchaseDetail';
+import SignUp from './SignUp';
 import Login from './Login';
-import Auth from './Auth';
 
 
 import { 
@@ -27,45 +26,52 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [isUserLoaded, setisUserLoaded] = useState(false)
   const [errors, setErrors] = useState([]);
+
+  const [needFetch, setNeedFetch] = useState(false)
+
+
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
 
-
-  //fetch user for testing. delete when login function is setup 
-  // useEffect(() => {
-  //   async function fetchUser(){
-  //       const res = await fetch(`/users/1`)
-  //       if (res.ok) {
-  //           const user =  await res.json()
-  //           setCurrentUser(user)
-  //           setCartItemInstances(user.in_cart_item_instances)
-  //           setisUserLoaded(true)
-  //       }
-  //   }
-  //   fetchUser()
-  // },[])
-
-  // if (!isUserLoaded) return <h2>Loading...</h2>;
-
-
-    //Staying logged in function
-    useEffect(() => {
-      fetch("/me").then((response) => {
-        if (response.ok) {
-          response.json().then((user) => setCurrentUser(user));
+  // fetch user for testing. delete when login function is setup 
+  useEffect(() => {
+    async function fetchUser(){
+        // const res = await fetch(`/me`) //=> users#show
+        const res = await fetch(`users/1`)
+        if (res.ok) {
+            const user =  await res.json()
+            setCurrentUser(user)
+            setCartItemInstances(user.in_cart_item_instances)
+            setisUserLoaded(true)
         }
-      });
-    }, []);
-  
-    if (currentUser) {
-      // return <h2>Welcome, {user.username}!</h2>;
-      console.log(currentUser)
-    } else {
-      // return <Login onLogin={setUser} />;
-      console.log('failed')
     }
+    fetchUser()
+  },[needFetch])
+
+  if (!isUserLoaded) return <h2>Loading...</h2>;
   
   
+
+  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
+
+  // useEffect(() => {
+  //   // auto-login
+  //   fetch("/me", 
+  //   // {
+  //   //   credentials: "include"
+  //   // }
+  //   ).then((r) => {  //get '/me/' => 'users#show' in routes.rb
+  //     if (r.ok) {
+  //       r.json().then((user) => {
+  //         setCurrentUser(user)
+  //         setCartItemInstances(user.in_cart_item_instances)
+  //       });
+  //     }
+  //   });
+  // }, []);
+
+  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
+
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -73,10 +79,8 @@ function App() {
     let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
     //is this item alreay in cart? yes - PATCH, no - POST
     if (itemAlreadyInCart) {
-      console.log( itemAlreadyInCart )
       // PATCH
       let totalQuantity = itemAlreadyInCart.in_cart_quantity + quantity
-      console.log(totalQuantity)
       async function updateCartItem() {
         const res = await fetch(`/cart_items/${itemAlreadyInCart.id}`, {
           method: "PATCH",
@@ -89,6 +93,7 @@ function App() {
           //update the state
           let deletedOldInstance = cartItemInstances.filter(i=> i !== itemAlreadyInCart)
           setCartItemInstances([...deletedOldInstance, itemInCartUpdated])
+          setNeedFetch(!needFetch)
         } else {
           const error = await res.json()
           setErrors(error.message)
@@ -118,6 +123,7 @@ function App() {
           //update the state
           console.log(addedToCartItem)
           setCartItemInstances([...cartItemInstances, addedToCartItem])
+          setNeedFetch(!needFetch)
         } else {
           const error = await res.json()
           setErrors(error.message)
@@ -133,8 +139,6 @@ function App() {
   function onLogout() {
     currentUser(null);
   }
-
-console.log(cartItemInstances)
 
   return (
     <div className="App">
@@ -155,15 +159,15 @@ console.log(cartItemInstances)
           </Route>
 
           <Route path="/shoppingcart" >
-            <ShoppingCart currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+            <ShoppingCart currentUser={currentUser} needFetch={needFetch} setNeedFetch={setNeedFetch}/>
           </Route>
 
           <Route path="/checkout">
-            <Checkout/>
+            <Checkout currentUser={currentUser}/>
           </Route>
 
-          <Route path="/user">
-            <User />
+          <Route path="/me">
+            <User currentUser={currentUser}/>
           </Route>
 
           <Route path="/items/:type/:id">
@@ -172,12 +176,14 @@ console.log(cartItemInstances)
                             />
           </Route>
 
-          <Route path="/purchasedetail">
+          <Route path="/purchase/:purchase_id">
             <PurchaseDetail />
           </Route>
+
            <Route exact path="/signup">
-               <Auth />
+               <SignUp />
            </Route>
+
         </Switch>
       </Router>
     </div>

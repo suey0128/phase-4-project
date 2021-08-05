@@ -1,13 +1,11 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react'
-import shape from "@material-ui/core/styles/shape";
 
 function ItemDetailPage ({showItemPage, onAddToCartClick}) {
     const [itemInfo, setItemInfo] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [addTocartQuantity, setAddTocartQuantity] = useState(1)
 
-    const history = useHistory();
     const params = useParams();
     // console.log (params)  => {type: "press_ons", id: "2"}
     // console.log(`${params.type}/${params.id}`)

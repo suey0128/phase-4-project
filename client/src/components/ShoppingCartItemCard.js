@@ -8,7 +8,7 @@ function ShoppingCartItemCard ({itemInfo, setNeedFetch, needFetch}) {
 
     const handleQuantityChange = (e) => {
         e.preventDefault();
-        console.log(typeof(quantityInput))
+        // console.log(typeof(quantityInput))
         //patch
         // if quantity === 0, destroy the cart_item instance, fetch again  for display 
         if (parseInt(quantityInput) === 0 ){
@@ -53,7 +53,7 @@ function ShoppingCartItemCard ({itemInfo, setNeedFetch, needFetch}) {
 
     return (
         <div>
-            <img className="img-in-cart" src={itemInfo.item.image}/>
+            <img className="img-in-cart" src={itemInfo.item.image} alt={itemInfo.item.name}/>
             <h3>name: {itemInfo.item.name}</h3>
             <p>price: ${itemInfo.item.price}</p>
             { isEditingQuantity ? 
