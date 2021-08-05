@@ -8,30 +8,49 @@ Glue.destroy_all
 HandCare.destroy_all
 
 puts "Seeding users..."
-u1 = User.create(username: "suey", first_name: "Suey", last_name:"Yu", password_digest: User.digest('123'), billing_address: "888 Amazing Ave., Seattle, WA, 98000, US", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US", email:"suey@gmail.com", birthday: Date.parse('2001-02-03'))
-u2 = User.create(username: "bri", first_name: "Briana", last_name:"Gordon", password_digest: User.digest('123'), billing_address: "777 Wonderful Ave., Los Angeles, CA, 97000, US", shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", email:"bri@gmail.com", birthday: Date.parse('2002-02-03'))
-u3 = User.create(username: "kiana", first_name: "Kiana", last_name:"Smith", password_digest: User.digest('123'), billing_address:"666 Great Ave., Detroit, MI, 96000, US ",shipping_address: "666 Great Ave., Detroit, MI, 96000, US",email:"kiana@gmail.com",birthday: Date.parse('1994-08-04'))
-u4 = User.create(username: "ashely", first_name: "Ashely", last_name:"Walker", password_digest:User.digest('123'), billing_address:"555 Good Ave., Huston, TX, 97000, US ",shipping_address: "555 Good Ave., Huston, TX, 97000, US",email:"ashely@att.net",birthday: Date.parse('1998-05-12'))
+u1 = User.create(username: "suey", first_name: "Suey", last_name:"Yu", password_digest: User.digest('123'), billing_address: "888 Amazing Ave., Seattle, WA, 98000, US", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US", email:"suey@gmail.com", birthday: Date.parse('2001-02-03'), address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US")
+u2 = User.create(username: "bri", first_name: "Briana", last_name:"Gordon", password_digest: User.digest('123'), billing_address: "777 Wonderful Ave., Los Angeles, CA, 97000, US", shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", email:"bri@gmail.com", birthday: Date.parse('2002-02-03'), address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US")
+u3 = User.create(username: "kiana", first_name: "Kiana", last_name:"Smith", password_digest: User.digest('123'), billing_address:"666 Great Ave., Detroit, MI, 96000, US ",shipping_address: "666 Great Ave., Detroit, MI, 96000, US",email:"kiana@gmail.com",birthday: Date.parse('1994-08-04'), address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US")
+u4 = User.create(username: "ashely", first_name: "Ashely", last_name:"Walker", password_digest:User.digest('123'), billing_address:"555 Good Ave., Huston, TX, 97000, US ",shipping_address: "555 Good Ave., Huston, TX, 97000, US",email:"ashely@att.net",birthday: Date.parse('1998-05-12'), address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US")
 
 puts "Seeding shopping_cart..."
-sc1 = ShoppingCart.create(user_id: u1.id, paid: false, first_name: "", last_name:"", shipping_address: "")
-sc2 = ShoppingCart.create(user_id: u1.id, paid: true, first_name: "Suey", last_name:"Yu", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US") #purchase
-sc3 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US" ) #purchase
-sc4 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US") #purchase
-sc5 = ShoppingCart.create(user_id: u2.id, paid: false, first_name: "", last_name:"", shipping_address: "")
-sc6 = ShoppingCart.create(user_id: u3.id, paid: false, first_name: "", last_name:"", shipping_address: "")
-sc7 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
-sc8 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
-sc9 = ShoppingCart.create(user_id: u4.id, paid: false, first_name: "", last_name:"", shipping_address: "")
-sc10 = ShoppingCart.create(user_id: u4.id, paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US") #purchase
+# sc1 = ShoppingCart.create(user_id: u1.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+# sc2 = ShoppingCart.create(user_id: u1.id, paid: true, first_name: "Suey", last_name:"Yu", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US") #purchase
+# sc3 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US" ) #purchase
+# sc4 = ShoppingCart.create(user_id: u2.id, paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US") #purchase
+# sc5 = ShoppingCart.create(user_id: u2.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+# sc6 = ShoppingCart.create(user_id: u3.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+# sc7 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
+# sc8 = ShoppingCart.create(user_id: u3.id, paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US") #purchase
+# sc9 = ShoppingCart.create(user_id: u4.id, paid: false, first_name: "", last_name:"", shipping_address: "")
+# sc10 = ShoppingCart.create(user_id: u4.id, paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US") #purchase
+
+sc1 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc2 = ShoppingCart.create(paid: true, first_name: "Suey", last_name:"Yu", shipping_address: "888 Amazing Ave., Seattle, WA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
+sc3 = ShoppingCart.create(paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US" ) #purchase
+sc4 = ShoppingCart.create(paid: true, first_name: "Briana", last_name:"Gordon",shipping_address: "777 Wonderful Ave., Los Angeles, CA, 98000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
+sc5 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc6 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc7 = ShoppingCart.create(paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
+sc8 = ShoppingCart.create(paid: true, first_name: "Kiana", last_name:"Smith", shipping_address: "666 Great Ave., Detroit, MI, 96000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
+sc9 = ShoppingCart.create(paid: false, first_name: "", last_name:"", shipping_address: "", address: "", city: "", state: "", zip: "", country: "")
+sc10 = ShoppingCart.create(paid: true, first_name: "Ashely", last_name:"Walker", shipping_address: "555 Good Ave., Huston, TX, 97000, US", address: "888 Amazing Ave.", city: "Seattle", state: "WA", zip: "98000", country: "US") #purchase
+
+puts "Seeding current_cart..."
+cc1 = CurrentCart.create(user_id: u1.id, shopping_cart_id: sc1.id)
+cc2 = CurrentCart.create(user_id: u2.id, shopping_cart_id: sc5.id)
+cc3 = CurrentCart.create(user_id: u3.id, shopping_cart_id: sc6.id)
+cc4 = CurrentCart.create(user_id: u4.id, shopping_cart_id: sc9.id)
+
 
 puts "Seeding payment..."
-p1 = Payment.create(user_id: u1.id, shopping_cart_id: sc2.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
-p2 = Payment.create(user_id: u1.id, shopping_cart_id: sc3.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+p1 = Payment.create(user_id: u1.id, shopping_cart_id: sc2.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00) 
+p2 = Payment.create(user_id: u2.id, shopping_cart_id: sc3.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00) 
 p3 = Payment.create(user_id: u2.id, shopping_cart_id: sc4.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
 p4 = Payment.create(user_id: u3.id, shopping_cart_id: sc8.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
 p5 = Payment.create(user_id: u4.id, shopping_cart_id: sc10.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
 p6 = Payment.create(user_id: u3.id, shopping_cart_id: sc7.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
+# p7 = Payment.create(user_id: u1.id, shopping_cart_id: sc1.id, total: 0.00, subtotal: 0.00, tax: 0.00, shipping:0.00)
 
 puts "Seeding press_On..."
 po1 = PressOn.create(name:"Lavender Touch",image:"https://img.ltwebstatic.com/images3_pi/2020/08/13/15972989601bf97065e3dc9934dbba3da1c9c7fee3_thumbnail_900x.webp", shape:"coffin",color:"purple", add_on:"", description:"Long,lavender, and coffin ", price:30.50, quantity:10, item_type:"PressOn" )
@@ -80,4 +99,8 @@ ct13 = CartItem.create(shopping_cart_id: sc8.id, item_id:g2.id,item_type:"Glue",
 ct14 = CartItem.create(shopping_cart_id: sc8.id, item_id:hc3.id,item_type:"HandCare", in_cart_quantity:1)
 ct15 = CartItem.create(shopping_cart_id: sc9.id, item_id:po15.id,item_type:"PressOn", in_cart_quantity:2)
 ct16 = CartItem.create(shopping_cart_id: sc10.id, item_id:hc3.id,item_type:"HandCare", in_cart_quantity:1)
+ct17 = CartItem.create(shopping_cart_id: sc2.id, item_id:po1.id, item_type:"PressOn", in_cart_quantity:2)
+ct18 = CartItem.create(shopping_cart_id: sc3.id, item_id:po1.id, item_type:"PressOn", in_cart_quantity:2)
+ct19 = CartItem.create(shopping_cart_id: sc3.id, item_id:po1.id, item_type:"PressOn", in_cart_quantity:2)
+
 puts "🌱🌱🌱🌱Done!🌱🌱🌱🌱"

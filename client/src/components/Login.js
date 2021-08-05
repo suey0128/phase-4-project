@@ -2,7 +2,7 @@ import {useHistory} from 'react-router-dom'
 import React, {useState} from 'react';
 import {Input, Form} from "./Styled";
 
-function Auth({setCurrentUser}){
+function Login({setCurrentUser}){
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState(null)
@@ -15,8 +15,9 @@ function Auth({setCurrentUser}){
             username:username,
             password:password
         }
-        const res = await fetch(`http://localhost:3000/login`,{
+        const res = await fetch(`http://localhost:3000/login`,{ //=>'sessions#create'
             method: 'POST',
+            // credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -26,7 +27,7 @@ function Auth({setCurrentUser}){
         if(userData.id){
             console.log(userData)
             setCurrentUser(userData)
-             history.push('/')
+            // history.push('/')
         } else {
             setErrors(userData.message)
         }
@@ -60,4 +61,4 @@ function Auth({setCurrentUser}){
     )
 
 }
-export default  Auth;
+export default  Login;
