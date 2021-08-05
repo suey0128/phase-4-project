@@ -86,11 +86,11 @@ export default function Checkout({currentUser}) {
   // console.log(currentUser)
   const [fName, setFname] = useState(currentUser.first_name)
   const [lName, setLname] = useState(currentUser.last_name)
-  const [address, setAddress] = useState(currentUser.shipping_address.split(', ')[0])
-  const [city, setCity] = useState(currentUser.shipping_address.split(', ')[1])
-  const [state, setState] = useState(currentUser.shipping_address.split(', ')[2])
-  const [zipCode, setZipCode] = useState(currentUser.shipping_address.split(', ')[3])
-  const [country, setCountry] = useState(currentUser.shipping_address.split(', ')[4])
+  const [address, setAddress] = useState(currentUser.address)
+  const [city, setCity] = useState(currentUser.city)
+  const [state, setState] = useState(currentUser.state)
+  const [zipCode, setZipCode] = useState(currentUser.zip)
+  const [country, setCountry] = useState(currentUser.country)
   const [saveAdd, setSaveAdd] = useState(true)
   const passToAddress = [fName, setFname, lName, setLname, address, setAddress, city, setCity, state, setState, zipCode, 
   setZipCode, country, setCountry, saveAdd, setSaveAdd] 
@@ -106,95 +106,162 @@ export default function Checkout({currentUser}) {
   let shipping = parseFloat(7.99)
   let total = parseFloat(subtotal) + parseFloat(tax) + parseFloat(shipping)
 
+  const [invoiceNum, setInvoiceNum] = useState("")
+
 
   const [errors, setErrors] = useState([]);
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
-  //POST a new payment instance connect (add new attr)
-  async function createPayment (createdPurchase) {
-    const res = await fetch(`payments`, {
+  // 4) create a new current_cart instance to connect the newEmmptyShoppingCart and the currentUser
+  async function createConnectingCurrentCart (emptyShoppingCart) {
+    const res = await fetch(`http://localhost:3000/current_carts`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        user_id: currentUser.id,
-        shopping_cart_id: createdPurchase.id,
-        total: total,
-        subtotal: subtotal,
-        tax: tax,
-        shipping: shipping
-      }),
+      body: JSON.stringify({user_id: currentUser.id, shopping_cart_id: emptyShoppingCart.id})
     });
     if (res.ok) {
-      const createdPayment = await res.json();
-      console.log('createdPayment', createdPayment)
+      const connectingCurrentCart = await res.json();
+      console.log('connecting current_cart instance', connectingCurrentCart)
+
+
+      
     } else {
       const err = await res.json()
       setErrors(err.errors)
     };
   }
 
+console.log(currentUser)
+
   const handleNext = () => {
-    if (activeStep === 2) {
+
+    
+    // next btn for address form, PATCH ADD
+    if (activeStep === 0) {
+      // regardless if the box is check, PATCH shopping_cart_addressInfo
+      const shippingInfo = {
+        first_name: fName,
+        last_name: lName, 
+        address,
+        city,
+        state,
+        zip: zipCode,
+        country
+      };
+      async function updateShoppingCartShippingInfo () {
+        const res = await fetch(`http://localhost:3000/shopping_carts/${currentUser.shopping_cart.id}`, {
+          method: 'PATCH',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(shippingInfo)
+        });
+        if (res.ok) {
+          const updatedShoppingCart = await res.json();
+          console.log('address patched in shopping_cart', updatedShoppingCart)
+          setActiveStep(activeStep + 1)
+        } else {
+          const err = await res.json()
+          setErrors(err.errors)
+        };
+      }
+      updateShoppingCartShippingInfo();
       //if box is check, PATCH user's shipping address
       if (saveAdd) {
-        const updateUser = {
-          first_name: fName,
-          last_name: lName, 
-          shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
-        };
-        async function updateShipping () {
-          const res = await fetch(`users/${currentUser.id}`, {
+        async function updateUserDefaltAddress () {
+          const res = await fetch(`http://localhost:3000/users/${currentUser.id}`, {
             method: 'PATCH',
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(updateUser),
+            body: JSON.stringify(shippingInfo),
           });
           if (res.ok) {
             const updatedUser = await res.json();
-            console.log('address patched', updatedUser)
+            console.log('address patched in user', updatedUser)
           } else {
             const err = await res.json()
             setErrors(err.errors)
           };
         }
-        updateShipping();
+        updateUserDefaltAddress();
       }
+    }
+    // PLACE ORDER BTN
+    else if (activeStep === 2) {
+      // 1) POST a new payment instance
+      const newPayment = {
+        user_id: currentUser.id,
+        shopping_cart_id: currentUser.shopping_cart.id,
+        total,
+        subtotal,
+        tax,
+        shipping
+      }
+      async function createPayment () {
+        const res = await fetch(`http://localhost:3000/payments`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPayment)
+        });
+        if (res.ok) {
+          const payment = await res.json();
+          console.log('new payment instance', payment)
+          setInvoiceNum(payment.id)
+          setActiveStep(activeStep + 1)
+        } else {
+          const err = await res.json()
+          setErrors(err.errors)
+        };
+      }
+      createPayment();
 
-      //POST a new shopping_cart instance (as purchase)
-      // const newPurchase = {
-      //   user_id: currentUser.id,
-      //   paid: true,
-      //   first_name: fName,
-      //   last_name: fName,
-      //   shipping_address: `${address}, ${city}, ${state} ${zipCode}, ${country}`
-      // }
-      // async function createPurchase () {
-      //   const res = await fetch(`shopping_carts`, {
-      //     method: 'POST',
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(newPurchase),
-      //   });
-      //   if (res.ok) {
-      //     const createdPurchase = await res.json();
-      //     console.log('createdPurchase', createdPurchase)
-      //     //POST a new payment instance connect (add new attr) and associate with this purchase 
-      //     createPayment(createdPurchase)
-      //   } else {
-      //     const err = await res.json()
-      //     setErrors(err.errors)
-      //   };
-      // }
-      // createPurchase();
+      // 2) DELETE the current_cart instance
+      async function deleteCurrentCart() {
+        const res = await fetch(`http://localhost:3000/current_carts/${currentUser.current_cart.id}`, {
+          method: 'DELETE'
+        })
+        if (res.ok) {
+          console.log("deleted")
+        }
+      }
+      deleteCurrentCart();
 
-      //clear out the current shopping cart instance by
-      //figure out a way to change all the cartItem's shopping_cart_id to new purchase 
+      //3) create a new shopping cart for the currentUser
+      const newEmptyShoppingCart = {
+        first_name: "",
+        last_name: "",
+        address: "",
+        city: "", 
+        state: "", 
+        zip: "", 
+        country: ""
+      }
+      async function createEmptyShoppingCart () {
+        const res = await fetch(`http://localhost:3000/shopping_carts`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newEmptyShoppingCart)
+        });
+        if (res.ok) {
+          const emptyShoppingCart = await res.json();
+          console.log('new emptyShoppingCart ', emptyShoppingCart)
+          createConnectingCurrentCart(emptyShoppingCart) 
+        } else {
+          const err = await res.json()
+          setErrors(err.errors)
+        };
+      }
+      createEmptyShoppingCart();
+
       //add setActiveStep 
 
     } else {
@@ -202,15 +269,9 @@ export default function Checkout({currentUser}) {
     }
   };
 
-
-
-  // console.log(`${address}, ${city}, ${state} ${zipCode}, ${country}`)
-
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
-
 
   return (
     <React.Fragment>
@@ -234,7 +295,7 @@ export default function Checkout({currentUser}) {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
+                  Your order number is #{invoiceNum}. We have emailed your order confirmation, and will
                   send you an update when your order has shipped.
                 </Typography>
               </React.Fragment>

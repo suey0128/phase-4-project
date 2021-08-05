@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :hand_cares
   resources :glues
   resources :press_ons
+  resources :current_carts
 
   post '/login/' => 'sessions#create'
   delete '/logout/' => 'sessions#destroy'

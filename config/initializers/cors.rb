@@ -9,27 +9,34 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'example.com'
+    origins 'localhost:4000'
 
     resource '*',
       headers: :any,
+      :credentials => true,
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
 
-Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, logger: (-> { Rails.logger }) do
-  allow do
-    origins '*'
+#ABOVE is the default in the file, and I changed it's origins from "*" to "localhost:4000", and added credentials
+#BELOW is from the rails github repo that the code for rails6, which I have. 
+# I changed it's origins from "*" to "localhost:4000", and added credentials
 
-    resource '/cors',
-      :headers => :any,
-      :methods => [:post],
-      :max_age => 0
+# Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, logger: (-> { Rails.logger }) do
+#   allow do
+#     # origins '*'
+#     origins 'localhost:4000'
 
-    resource '*',
-      :headers => :any,
-      :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-      :max_age => 0
-  end
-end
+#     resource '/cors',
+#       :headers => :any,
+#       :methods => [:post],
+#       :max_age => 0
+
+#     resource '*',
+#       :headers => :any,
+#       :credentials => true,
+#       :methods => [:get, :post, :delete, :put, :patch, :options, :head],
+#       :max_age => 0
+#   end
+# end
 

@@ -1,21 +1,25 @@
-class PaymentsController < ApplicationController
+class CurrentCartsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def index
-        payments = Payment.all
-        render json: payments
+        current_carts = CurrentCart.all
+        render json: current_carts
     end
 
     def create
-        payment = Payment.create!(payment_params)
-        render json: payment
+        current_cart = CurrentCart.create!(current_cart_params)
+        render json: current_cart
     end
 
-    private
+    def destroy
+        current_cart = CurrentCart.find(params[:id])
+        current_cart.destroy
+        head :no_content
+    end
 
-    def payment_params
-        params.require(:payment).permit(:user_id, :shopping_cart_id, :total, :subtotal, :tax, :shipping)
+    def current_cart_params
+        params.require(:current_cart).permit(:user_id, :shopping_cart_id)
     end
 
     def render_not_found_response
@@ -25,4 +29,5 @@ class PaymentsController < ApplicationController
     def render_unprocessable_entity_response(invalid)
         render json: { errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
     end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_075214) do
+ActiveRecord::Schema.define(version: 2021_08_05_002714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 2021_08_04_075214) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "in_cart_quantity"
     t.index ["item_id", "item_type"], name: "index_cart_items_on_item_id_and_item_type"
+  end
+
+  create_table "current_carts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "shopping_cart_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "glues", force: :cascade do |t|
@@ -74,13 +81,17 @@ ActiveRecord::Schema.define(version: 2021_08_04_075214) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "paid"
     t.string "first_name"
     t.string "last_name"
     t.string "shipping_address"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,6 +105,11 @@ ActiveRecord::Schema.define(version: 2021_08_04_075214) do
     t.date "birthday"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
   end
 
 end

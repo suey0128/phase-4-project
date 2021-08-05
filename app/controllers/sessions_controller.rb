@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
         else
             render json: { errors: ["Incorrect username and/or password"] }, status: :unauthorized
         end
+        # byebug #=> session[:user_id] = 1 , created
     end
 
 end

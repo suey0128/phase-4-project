@@ -6,10 +6,9 @@ import ItemDetailPage from './ItemDetailPage';
 import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
 import User from './User';
-import PurchaseDetail from './PurchaseDetail'
-import SignUp from './SignUp'
+import PurchaseDetail from './PurchaseDetail';
+import SignUp from './SignUp';
 import Login from './Login';
-import Auth from './Auth';
 
 
 import { 
@@ -34,11 +33,11 @@ function App() {
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
 
-
-  //fetch user for testing. delete when login function is setup 
+  // fetch user for testing. delete when login function is setup 
   useEffect(() => {
     async function fetchUser(){
-        const res = await fetch(`/users/1`)
+        // const res = await fetch(`/me`) //=> users#show
+        const res = await fetch(`users/1`)
         if (res.ok) {
             const user =  await res.json()
             setCurrentUser(user)
@@ -50,27 +49,29 @@ function App() {
   },[])
 
   if (!isUserLoaded) return <h2>Loading...</h2>;
-
-
-
-    //Staying logged in function
-    useEffect(() => {
-      fetch("/me").then((response) => {
-        if (response.ok) {
-          response.json().then((user) => setCurrentUser(user));
-        }
-      });
-    }, []);
-  
-    if (currentUser) {
-      // return <h2>Welcome, {user.username}!</h2>;
-      console.log(currentUser)
-    } else {
-      // return <Login onLogin={setUser} />;
-      console.log('failed')
-    }
   
   
+
+  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
+
+  // useEffect(() => {
+  //   // auto-login
+  //   fetch("/me", 
+  //   // {
+  //   //   credentials: "include"
+  //   // }
+  //   ).then((r) => {  //get '/me/' => 'users#show' in routes.rb
+  //     if (r.ok) {
+  //       r.json().then((user) => {
+  //         setCurrentUser(user)
+  //         setCartItemInstances(user.in_cart_item_instances)
+  //       });
+  //     }
+  //   });
+  // }, []);
+
+  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
+
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
@@ -172,9 +173,11 @@ function App() {
           <Route path="/purchasedetail">
             <PurchaseDetail />
           </Route>
+
            <Route exact path="/signup">
-               <Auth />
+               <SignUp />
            </Route>
+
         </Switch>
       </Router>
     </div>
