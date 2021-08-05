@@ -17,7 +17,7 @@ function Login({setCurrentUser}){
         }
         const res = await fetch(`http://localhost:3000/login`,{ //=>'sessions#create'
             method: 'POST',
-            // credentials: "include",
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },

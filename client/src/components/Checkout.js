@@ -126,9 +126,6 @@ export default function Checkout({currentUser}) {
     if (res.ok) {
       const connectingCurrentCart = await res.json();
       console.log('connecting current_cart instance', connectingCurrentCart)
-
-
-      
     } else {
       const err = await res.json()
       setErrors(err.errors)
@@ -138,8 +135,6 @@ export default function Checkout({currentUser}) {
 // console.log(currentUser)
 
   const handleNext = () => {
-
-    
     // next btn for address form, PATCH ADD
     if (activeStep === 0) {
       // regardless if the box is check, PATCH shopping_cart_addressInfo

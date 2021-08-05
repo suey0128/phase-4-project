@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
           method: "DELETE",
         }).then(() => onLogout());
       }
+      
     return (
       <div className={classes.root}>
         <AppBar position="static">
