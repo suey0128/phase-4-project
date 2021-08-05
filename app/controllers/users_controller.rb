@@ -12,7 +12,6 @@ class UsersController < ApplicationController
         render json: user
     end
 
-<<<<<<< HEAD
     def show 
         user =User.find_by(id: session[:user_id])
         if user
@@ -20,7 +19,7 @@ class UsersController < ApplicationController
         else 
           render json: {error:"Not authorized"},status: :unauthorized
          end 
-=======
+        end
     # def show
     #     #when the user signup, the id is stored in session(cookie), find the user using cookie
     #     user = User.find_by(id: session[:user_id])
@@ -31,27 +30,16 @@ class UsersController < ApplicationController
     #         render json: { error: "Not authorized"}, status: :unauthorized
     #     end
     # end
-
-    def show
-
-        user = User.find(params[:id])
-        render json: user
-    end
-
+# /
     def update
         user = User.find(params[:id])
         user.update!(user_params)
         render json: user
->>>>>>> main
     end
     private
 
     def user_params
-<<<<<<< HEAD
-        params.require(:user).permit(:username,:first_name,:last_name,:password, :billing_address, :shipping_address, :email, :birthday)
-=======
         params.require(:user).permit(:username, :first_name, :last_name, :password, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
->>>>>>> main
     end
 
     def render_not_found_response
