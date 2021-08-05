@@ -70,11 +70,11 @@ function App() {
     });
   }, []);
 
-  if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
-
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
+    //is the person login ? 
+    if (currentUser) {
     // console.log(shoppingCartDisplayItemList, item)
     let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
     //is this item alreay in cart? yes - PATCH, no - POST
@@ -131,7 +131,11 @@ function App() {
       };
       createCartItem();
     };
+    } else {
+      alert("Please Sign Up or Login")
+    }
   }
+
   function onLogin(user) {
     currentUser(user);
   }
@@ -141,6 +145,8 @@ function App() {
   }
 
   return (
+    <>
+    {currentUser ?
     <div className="App">
       <Router>
         <Header currentUser={currentUser} onLogout={onLogout} />
@@ -148,14 +154,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home  showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
-          </Route>
-
-          {/* <Route path="/signup">
-            <SignUp />
-          </Route> */}
-
-          <Route path="/login">
-            <Login  setCurrentUser={setCurrentUser}/>
           </Route>
 
           <Route path="/shoppingcart" >
@@ -180,13 +178,38 @@ function App() {
             <PurchaseDetail />
           </Route>
 
-           <Route exact path="/signup">
-               <Auth />
-           </Route>
-
         </Switch>
       </Router>
     </div>
+    : 
+    <div>
+    <Router>
+        <Header currentUser={currentUser} onLogout={onLogout} />
+
+        <Switch>
+          <Route exact path="/">
+            <Home  showItemPage={showItemPage} setShowItemPage={setShowItemPage} onAddToCartClick={onAddToCartClick}/>
+          </Route>
+
+          <Route path="/items/:type/:id">
+            <ItemDetailPage showItemPage={showItemPage} 
+                            onAddToCartClick={onAddToCartClick}
+                            />
+          </Route>
+
+          <Route path="/login">
+            <Login  setCurrentUser={setCurrentUser}/>
+          </Route>
+
+          <Route exact path="/signup">
+               <Auth />
+          </Route>
+
+        </Switch>
+    </Router>
+    </div>
+    }
+    </>
   );
 }
 
