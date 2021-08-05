@@ -136,12 +136,8 @@ function App() {
     }
   }
 
-  function onLogin(user) {
-    currentUser(user);
-  }
-
   function onLogout() {
-    currentUser(null);
+    setCurrentUser(null);
   }
 
   return (
@@ -202,7 +198,7 @@ function App() {
           </Route>
 
           <Route exact path="/signup">
-               <Auth />
+               <Auth setCurrentUser={setCurrentUser}/>
           </Route>
 
         </Switch>

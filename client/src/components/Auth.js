@@ -14,6 +14,7 @@ function Auth({setCurrentUser}){
 
     async function handleSubmit(e){
         e.preventDefault()
+        //create new user instance.
         const user = { 
             username,
             password,
@@ -25,11 +26,12 @@ function Auth({setCurrentUser}){
             address: "n/a",
             city: "n/a", 
             state: "na", 
-             zip: "00000", 
-           country: "n/a"
+            zip: "00000", 
+            country: "n/a"
         }
         const res = await fetch(`http://localhost:3000/users`,{
             method: 'POST',
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -38,11 +40,10 @@ function Auth({setCurrentUser}){
         const userData = await res.json();
         if(res.ok){
             console.log(userData)
-            // setCurrentUser(userData)
-            debugger
+            setCurrentUser(userData)
             history.push('/')
         } else {
-            setErrors(userData.message)
+            alert(userData.errors)
         }
 
     };
