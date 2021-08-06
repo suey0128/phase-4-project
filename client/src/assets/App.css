@@ -1,6 +1,6 @@
 .App{
   background: linear-gradient(110.5deg, rgba(248, 196, 249, 0.66) 22.8%, rgba(253, 122, 4, 0.15) 64.6%);
-
+  padding:20px 20px 20px 20px;
 }
 .Login{
   background: linear-gradient(110.5deg, rgba(248, 196, 249, 0.66) 22.8%, rgba(253, 122, 4, 0.15) 64.6%);
@@ -9,8 +9,8 @@
 
 
 .img-in-card {
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   object-fit: cover
 }
 
@@ -39,7 +39,7 @@
 .homePageButton{ border: none;
   outline: none;
   border-radius: 26px;
-  background: linear-gradient(to right, #c9ffbf, #ffafbd);
+  background: linear-gradient(to right, #a5bdfd, #dcb5ff);
   color: black;
   font-weight: 800;
   padding: 10px 20px;
@@ -57,8 +57,23 @@
  font-weight:900;
 }
 .welcomeback{
-  padding-left: 100px;
+  padding-left: 700px;
 }
 .signupPage{
   text-align: center;
+}
+
+.detailPage{
+  text-align: center;
+}
+
+.detailImage{
+  background-position-x: center;
+  background-size: contain;
+  width: 300px;
+  height:300px;
+}
+
+.homebodyContainer{
+  padding: 5px 5px 5px 5px;
 }

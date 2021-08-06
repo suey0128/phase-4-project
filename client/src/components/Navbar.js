@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         <AppBar position="static">
           <Toolbar>
 
-            {currentUser ? <h2>Welcome Back {currentUser.username}</h2> : null }
+            {currentUser ? <h2>Welcome {currentUser.username}</h2> : null }
 
             <NavLink to="/">
             <Typography variant="h6" className={classes.title} className="welcomeback">

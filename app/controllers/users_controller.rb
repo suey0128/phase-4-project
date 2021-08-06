@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :first_name, :last_name, :password, :password_confirmation, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
+        params.permit(:username, :first_name, :last_name, :password, :password_confirmation, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
     end
 
     # def shopping_cart_params

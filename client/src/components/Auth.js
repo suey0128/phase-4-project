@@ -35,7 +35,7 @@ function Auth({setCurrentUser}){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         });
         const userData = await res.json();
         if(res.ok){
