@@ -29,13 +29,14 @@ function Auth({setCurrentUser}){
             zip: "00000", 
             country: "n/a"
         }
+        // console.log(user)
         const res = await fetch(`http://localhost:3000/users`,{
             method: 'POST',
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         });
         const userData = await res.json();
         if(res.ok){
