@@ -35,9 +35,9 @@ function ItemDetailPage ({showItemPage, onAddToCartClick}) {
 
     return (
 
-        <div>
-            <h2>this is ItemDetailPage</h2>
-            <img src={itemInfo.image}/>
+        <div className="detailPage">
+            <h2>Details</h2>
+            <img src={itemInfo.image} className="detailImage"/>
             <h3>{itemInfo.name}</h3>
             <p>$ {itemInfo.price}</p>
             <p>{itemInfo.quantity}</p> 
