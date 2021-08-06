@@ -31,6 +31,7 @@ function UserInfo ({currentUser, setCurrentUser}) {
     }
 
     return (
+
         <>
         {isEditing ?
             <div>
@@ -86,7 +87,7 @@ function UserInfo ({currentUser, setCurrentUser}) {
             </div>
         }
         </>
-       
+     
     )
   }
   
