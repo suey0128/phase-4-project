@@ -92,7 +92,7 @@ console.log(pressOnOnDisplay)
 
     return (
         <div>
-           <h1 className="homeContainerTitle">Press On's</h1>
+           <h1 className="homeContainerTitle">Press Ons</h1>
             <HomeICPressOnFilter onHandleColorCheckBoxChange={onHandleColorCheckBoxChange}
                                  onHandleShapeCheckBoxChange={onHandleShapeCheckBoxChange}
                                  onHandleAddOnCheckBoxChange={onHandleAddOnCheckBoxChange}
