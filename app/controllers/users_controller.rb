@@ -31,24 +31,14 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-
         user.update!(user_params)
         render json: user
     end
     private
 
     def user_params
-        params.require(:user).permit(:username, :first_name, :last_name, :password, :password_confirmation, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
+        params.permit(:username, :first_name, :last_name, :password, :password_confirmation, :billing_address, :email, :birthday, :address, :city, :state, :zip, :country)
     end
-
-    # def shopping_cart_params
-    #     params.permit(:paid, :first_name, :last_name, :address, :city, :state, :zip, :country)
-    # end
-
-
-    # def current_cart_params
-    #     params.require(:current_cart).permit(:user_id, :shopping_cart_id)
-    # end
 
     def render_not_found_response
         render json: {error: "User not found"}, status: :not_found

@@ -1,7 +1,7 @@
 import UserInfoEdit from "./UserInfoEdit";
 // import {Input, Form} from "./Styled";
 
-import {useState} from "react"
+import {useState } from "react"
 
 function UserInfo ({currentUser, setCurrentUser}) {
     const [isEditing, setIsEditing] = useState(false)
@@ -9,13 +9,15 @@ function UserInfo ({currentUser, setCurrentUser}) {
     const [newPassword, setNewPassword] = useState("")
     const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("")
 
+
+
     const handlePasswordChange = (e) => {
         e.preventDefault()
         async function updateUser() {
             const res = await fetch(`/users/${currentUser.id}`, {
               method: "PATCH",
               headers: { 'Content-Type': 'application/json'},
-              body: JSON.stringify({password: newPassword, password_confirmation: newPasswordConfirmation})
+              body: JSON.stringify({username:currentUser.username, password: newPassword, password_confirmation: newPasswordConfirmation})
             });
             if (res.ok) {
               const newProfile = await res.json();

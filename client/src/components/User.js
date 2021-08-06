@@ -1,7 +1,14 @@
 import UserInfo from "./UserInfo";
 import UserPurchase from "./UserPurchase";
 
-function User ({currentUser, setCurrentUser}) {
+import {useEffect} from "react"
+
+function User ({currentUser, setCurrentUser, setNeedFetch, needFetch}) {
+
+ //fetch the shopping cart items  
+  useEffect(() => {
+    setNeedFetch(!needFetch)
+  },[])
 
     return (
         <div>

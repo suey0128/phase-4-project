@@ -131,6 +131,8 @@ function UserInfoEdit ({ currentUser, setCurrentUser, setIsEditing }) {
 
            </Form> 
 
+           <button onClick={()=>{setIsEditing(false)}}> Go Back </button>
+
         </div>
     )
   }

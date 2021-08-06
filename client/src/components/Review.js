@@ -29,6 +29,7 @@ export default function Review({currentUser, passToAddress}) {
   let tax = (parseFloat(currentUser.shopping_cart.total_amount) * 0.065).toFixed(2)
   let shipping = parseFloat(7.99)
   let total = parseFloat(subtotal) + parseFloat(tax) + parseFloat(shipping)
+  total =total.toFixed(2)
 
 
 
@@ -41,7 +42,7 @@ export default function Review({currentUser, passToAddress}) {
         {checkoutItems.map((product) => (
           <ListItem className={classes.listItem} key={product.cart_item_id}>
             <ListItemText primary={product.item.name} secondary={product.item.description} />
-            <Typography variant="body2">$ {product.item_total}</Typography>
+            <Typography variant="body2">{product.quantity}x     ${product.item_total}</Typography>
           </ListItem>
         ))}
 
