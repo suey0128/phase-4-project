@@ -218,7 +218,7 @@ export default function Checkout({currentUser}) {
         if (res.ok) {
           const payment = await res.json();
           console.log('new payment instance', payment)
-          setInvoiceNum(payment.id)
+          setInvoiceNum(payment.shopping_cart_id)
           setActiveStep(activeStep + 1)
         } else {
           const err = await res.json()

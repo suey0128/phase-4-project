@@ -140,7 +140,7 @@ function App() {
           </Route>
 
           <Route path="/me">
-            <User currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+            <User currentUser={currentUser} setCurrentUser={setCurrentUser} needFetch={needFetch} setNeedFetch={setNeedFetch}/>
           </Route>
 
           <Route path="/items/:type/:id">

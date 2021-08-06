@@ -29,6 +29,7 @@ function Auth({setCurrentUser}){
             zip: "00000", 
             country: "n/a"
         }
+        // console.log(user)
         const res = await fetch(`http://localhost:3000/users`,{
             method: 'POST',
             credentials: "include",

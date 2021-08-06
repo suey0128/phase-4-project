@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
               <NavLink to="/shoppingcart">
               <Button color="inherit">Shopping cart</Button>
               </NavLink>
+
               <NavLink to="/me">
               <Button color="inherit">Profile</Button>
               </NavLink> 
