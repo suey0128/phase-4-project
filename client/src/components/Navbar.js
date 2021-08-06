@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,17 +24,24 @@ const useStyles = makeStyles((theme) => ({
   function NavBar({currentUser,onLogout}) {
     const classes = useStyles();
 
+    const history = useHistory();
+
     function handleLogout() {
         fetch("/logout", {
           method: "DELETE",
-        }).then(() => onLogout());
+        }).then(() => {
+          onLogout()
+          history.push('/')
+        });
       }
       
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {currentUser ? <h2>Welcome Back, {currentUser.username}</h2> : null }
+
+            {currentUser ? <h2>Welcome Back {currentUser.username}</h2> : null }
+
             <NavLink to="/">
             <Typography variant="h6" className={classes.title} className="welcomeback">
               Nail Code

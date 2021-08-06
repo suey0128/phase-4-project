@@ -33,27 +33,6 @@ function App() {
   // keep track of the cartItem instances
   const [cartItemInstances, setCartItemInstances] = useState([])
 
-  // // fetch user for testing. delete when login function is setup 
-  // useEffect(() => {
-  //   async function fetchUser(){
-  //       // const res = await fetch(`/me`) //=> users#show
-  //       const res = await fetch(`users/1`)
-  //       if (res.ok) {
-  //           const user =  await res.json()
-  //           setCurrentUser(user)
-  //           setCartItemInstances(user.in_cart_item_instances)
-  //           setisUserLoaded(true)
-  //       }
-  //   }
-  //   fetchUser()
-  // },[needFetch])
-
-  // if (!isUserLoaded) return <h2>Loading...</h2>;
-  
-  
-
-  // if (!currentUser) return <Login setCurrentUser={setCurrentUser} />;
-
   useEffect(() => {
     // auto-login
     fetch("/me", 
@@ -68,69 +47,69 @@ function App() {
         });
       }
     });
-  }, []);
+  }, [needFetch]);
 
 
   const onAddToCartClick = (e, quantity, item) => {
     e.preventDefault();
     //is the person login ? 
     if (currentUser) {
-    // console.log(shoppingCartDisplayItemList, item)
-    let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
-    //is this item alreay in cart? yes - PATCH, no - POST
-    if (itemAlreadyInCart) {
-      // PATCH
-      let totalQuantity = itemAlreadyInCart.in_cart_quantity + quantity
-      async function updateCartItem() {
-        const res = await fetch(`/cart_items/${itemAlreadyInCart.id}`, {
-          method: "PATCH",
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({in_cart_quantity: totalQuantity })
-        });
-        if (res.ok) {
-          const itemInCartUpdated = await res.json();
-          console.log("dataBackFromPatch",itemInCartUpdated)
-          //update the state
-          let deletedOldInstance = cartItemInstances.filter(i=> i !== itemAlreadyInCart)
-          setCartItemInstances([...deletedOldInstance, itemInCartUpdated])
-          setNeedFetch(!needFetch)
-        } else {
-          const error = await res.json()
-          setErrors(error.message)
+      // console.log(shoppingCartDisplayItemList, item)
+      let itemAlreadyInCart = cartItemInstances.find(i=> i.item_type === item.item_type && i.item_id===item.id) //=>item instance or false value
+      //is this item alreay in cart? yes - PATCH, no - POST
+      if (itemAlreadyInCart) {
+        // PATCH
+        let totalQuantity = itemAlreadyInCart.in_cart_quantity + quantity
+        async function updateCartItem() {
+          const res = await fetch(`/cart_items/${itemAlreadyInCart.id}`, {
+            method: "PATCH",
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({in_cart_quantity: totalQuantity })
+          });
+          if (res.ok) {
+            const itemInCartUpdated = await res.json();
+            console.log("dataBackFromPatch",itemInCartUpdated)
+            //update the state
+            let deletedOldInstance = cartItemInstances.filter(i=> i !== itemAlreadyInCart)
+            setCartItemInstances([...deletedOldInstance, itemInCartUpdated])
+            setNeedFetch(!needFetch)
+          } else {
+            const error = await res.json()
+            setErrors(error.message)
+          }
         }
-      }
-      updateCartItem();
-    }  else {
-      //POST
-      //extract the info needed to pass to the backend
-      let addedItem = {
-        shopping_cart_id: currentUser.shopping_cart.id, 
-        item_id: item.id,
-        item_type:item.item_type,
-        in_cart_quantity: quantity
-      }
-      //make a POST request
-      async function createCartItem() {
-        const res = await fetch(`/cart_items`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(addedItem),
-        })
-        if (res.ok) {
-          let addedToCartItem = await res.json();
-          //update the state
-          console.log(addedToCartItem)
-          setCartItemInstances([...cartItemInstances, addedToCartItem])
-          setNeedFetch(!needFetch)
-        } else {
-          const error = await res.json()
-          setErrors(error.message)
+        updateCartItem();
+      }  else {
+        //POST
+        //extract the info needed to pass to the backend
+        let addedItem = {
+          shopping_cart_id: currentUser.shopping_cart.id, 
+          item_id: item.id,
+          item_type:item.item_type,
+          in_cart_quantity: quantity
         }
+        //make a POST request
+        async function createCartItem() {
+          const res = await fetch(`/cart_items`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(addedItem),
+          })
+          if (res.ok) {
+            let addedToCartItem = await res.json();
+            //update the state
+            console.log(addedToCartItem)
+            setCartItemInstances([...cartItemInstances, addedToCartItem])
+            setNeedFetch(!needFetch)
+          } else {
+            const error = await res.json()
+            setErrors(error.message)
+          }
+        };
+        createCartItem();
       };
-      createCartItem();
-    };
     } else {
       alert("Please Sign Up or Login")
     }
@@ -161,7 +140,7 @@ function App() {
           </Route>
 
           <Route path="/me">
-            <User currentUser={currentUser}/>
+            <User currentUser={currentUser} setCurrentUser={setCurrentUser}/>
           </Route>
 
           <Route path="/items/:type/:id">

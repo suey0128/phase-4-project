@@ -21,7 +21,7 @@ function HomeSearchAndSort ({onSearchChange, onSortBarChange, setShowItemPage}) 
                 </div>
                     <select name="SortBy" id="SortBy" onChange={(e)=>{onSortBarChange(e.target.value)}}>
                         <option value="sortBy">Sort by</option>
-                        <option value="bestSelling">Best Selling</option>
+                        {/* <option value="bestSelling">Best Selling</option> */}
                         <option value="priceLowtoHigh">Price: Low to High</option>
                         <option value="priceHightoLow">Price: High to Low</option>
                     </select>
