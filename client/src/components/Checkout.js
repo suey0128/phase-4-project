@@ -191,7 +191,7 @@ export default function Checkout({currentUser}) {
     else if (activeStep === 1) {
       // const passToPayment = [nameOnCard, setNameOnCard, cardNum, setCardNum, expiry, setExpiry, cvv, setCvv]
       if (nameOnCard.length === 0) {alert("Please enter your name on card") } 
-      else if (cardNum.length !== 16 || isNaN(cardNum)) {alert("Please enter valid card number. xxxx-xxxx-xxxx-xxxx") }
+      else if (cardNum.length !== 16 || isNaN(cardNum)) {alert("Please enter a 16 digits valid card number. xxxxxxxxxxxxxxxx") }
       else if (expiry.length !==5 ) {alert("Please enter valid expiration date. xx/xx")}
       else if (cvv.length !==3 ) {alert("Please enter valid cvv number. A 3 digit number")}
       else { setActiveStep(activeStep + 1) }
