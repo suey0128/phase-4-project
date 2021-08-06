@@ -1,8 +1,11 @@
-.App {
+.App{
   background: linear-gradient(110.5deg, rgba(248, 196, 249, 0.66) 22.8%, rgba(253, 122, 4, 0.15) 64.6%);
 
 }
+.Login{
+  background: linear-gradient(110.5deg, rgba(248, 196, 249, 0.66) 22.8%, rgba(253, 122, 4, 0.15) 64.6%);
 
+}
 
 
 .img-in-card {
@@ -33,13 +36,29 @@
   font-weight:700;
   font-size:15px;
 }
-.homePageButton{
-  border-radius:15px;
-  font-weight: 600;
+.homePageButton{ border: none;
+  outline: none;
+  border-radius: 26px;
+  background: linear-gradient(to right, #c9ffbf, #ffafbd);
+  color: black;
+  font-weight: 800;
+  padding: 10px 20px;
+  
 }
 .search-div{
   padding-top:25px;
 }
 .pressOnPageLabels{
   font-weight:600;
+}
+.homeContainerTitle{
+  Text-align: center; 
+ color:#77529E;
+ font-weight:900;
+}
+.welcomeback{
+  padding-left: 100px;
+}
+.signupPage{
+  text-align: center;
 }

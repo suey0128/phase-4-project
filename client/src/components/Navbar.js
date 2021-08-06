@@ -34,14 +34,9 @@ const useStyles = makeStyles((theme) => ({
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-
-            </IconButton>
-            {currentUser ? <h2>Welcome Back {currentUser.username}</h2> : null }
-
+            {currentUser ? <h2>Welcome Back, {currentUser.username}</h2> : null }
             <NavLink to="/">
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" className={classes.title} className="welcomeback">
               Nail Code
             </Typography>
             </NavLink>
@@ -51,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
               <NavLink to="/shoppingcart">
               <Button color="inherit">Shopping cart</Button>
               </NavLink>
-
+s
               <NavLink to="/me">
               <Button color="inherit">Profile</Button>
               </NavLink> 

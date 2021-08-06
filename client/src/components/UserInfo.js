@@ -1,7 +1,7 @@
 function UserInfo ({currentUser}) {
     return (
         <div className="userInfoPage">
-            <h2 className="userInfoTitle"> UserInfo</h2>
+            <h2 className="userInfoTitle"> {currentUser.username}'s Info</h2>
             <p className="userinfo">Username:</p> <p>{currentUser.username}</p>
 
             <p className="userinfo">Default Shipping Address: </p>

@@ -49,7 +49,7 @@ function Auth({setCurrentUser}){
     };
     return(
         <>
-            <h1>Sign up</h1>
+            <h1 className="signupPage">Sign up</h1>
            <Form onSubmit={handleSubmit}>
                 <Input
                 type= "text"
