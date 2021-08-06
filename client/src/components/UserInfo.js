@@ -46,7 +46,7 @@ function UserInfo ({currentUser, setCurrentUser}) {
 
                 <p className="userinfo">Default Shipping Address: </p>
                 <p className="userinfo">Address:</p> <p>{currentUser.address}</p>
-                <p className="userinfo"> {currentUser.first_name} {currentUser.last_name}</p>
+                <p className="userinfo"> Name: {currentUser.first_name} {currentUser.last_name}</p>
                 <p className="userinfo">City: </p> <p>{currentUser.city}</p>
                 <p className="userinfo">State: </p> <p>{currentUser.state}</p>
                 <p className="userinfo">Country: </p> <p>{currentUser.country}</p>
